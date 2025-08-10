@@ -1,5 +1,12 @@
 plugins {
-    id 'java-library'
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) } // или твой JDK
 }
 
 repositories {
@@ -7,11 +14,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation(
-            "com.codeborne:selenide:6.19.1",
-            "org.junit.jupiter:junit-jupiter:5.10.0",
-            'org.slf4j:slf4j-simple:2.0.7'
-    )
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testImplementation 'com.codeborne:selenide:7.5.1' // актуальную версию можно обновить позже
+    testRuntimeOnly  'org.slf4j:slf4j-simple:2.0.13'  // чтобы видеть логи (по желанию)
 }
 
 test {
