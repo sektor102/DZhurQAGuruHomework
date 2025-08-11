@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TestFillFormDZhurbin {
+public class TestFillFormDZhurbinLess3 {
 
     @BeforeAll
     static void beforeAll() {
