@@ -1,12 +1,11 @@
-import java.io.File;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class DZhurbinTestDemo {
 
@@ -24,26 +23,75 @@ public class DZhurbinTestDemo {
         $("#firstName").setValue("John");
         $("#lastName").setValue("Shepard");
         $("#userEmail").setValue("JohnS@normandy.com");
-        $("label[for='gender-radio-1']").click();
+        $(byText("Male")).click();
         $("#userNumber").setValue("1877667623");
-        $("#dateOfBirthInput").sendKeys(Keys.CONTROL + "a"); // выделить всё
+        $("#dateOfBirthInput").sendKeys(Keys.CONTROL + "a");
         $("#dateOfBirthInput").sendKeys("11 Apr 2054" + Keys.ENTER);
         $("#subjectsContainer").click();
         $("#subjectsContainer input").setValue("Computer Science").pressEnter();
-        $("label[for='hobbies-checkbox-2']").click();
-        File file = new File("C:/Users/dante/Desktop/Pic from idea/John_Shepard_29.jpg"); // путь к файлу
-        $("#uploadPicture").uploadFile(file);
+        $(byText("Reading")).click();
+        $("#uploadPicture").uploadFromClasspath("John_Shepard_29.jpg");
         $("#currentAddress").setValue("Uss Normandy");
         $("#lastName").setValue("Shepard");
         $("#userEmail").setValue("JohnS@normandy.com");
         $("#state").click();
         $("#state input").setValue("NCR").pressEnter();
-        $("#state").shouldHave(text("NCR")); // быстрая проверка
         $("#city").click();
         $("#city input").setValue("Noida").pressEnter();
-        $("#city").shouldHave(text("Noida"));
         $("#submit").click();
 
+        $(".modal-body").shouldBe(visible);
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Student Name"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("John Shepard"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Student Email"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("JohnS@normandy.com"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Gender"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("Male"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Mobile"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("1877667623"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Date of Birth"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("11 April,2054"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Subjects"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("Computer Science"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Hobbies"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("Reading"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Picture"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("John_Shepard_29.jpg"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("Address"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("Uss Normandy"));
+
+        $$(".modal-body tbody tr")
+                .findBy(text("State and City"))
+                .$("td:nth-child(2)")
+                .shouldHave(exactText("NCR Noida"));
     }
 }
+
 
