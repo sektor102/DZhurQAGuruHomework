@@ -23,13 +23,13 @@ public class TestFillFormDZhurbin {
         $("#firstName").setValue("John");
         $("#lastName").setValue("Shepard");
         $("#userEmail").setValue("JohnS@normandy.com");
-        $(byText("Male")).click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#userNumber").setValue("1877667623");
         $("#dateOfBirthInput").sendKeys(Keys.CONTROL + "a");
         $("#dateOfBirthInput").sendKeys("11 Apr 2054" + Keys.ENTER);
         $("#subjectsContainer").click();
         $("#subjectsContainer input").setValue("Computer Science").pressEnter();
-        $(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
         $("#uploadPicture").uploadFromClasspath("John_Shepard_29.jpg");
         $("#currentAddress").setValue("Uss Normandy");
         $("#lastName").setValue("Shepard");
@@ -42,55 +42,16 @@ public class TestFillFormDZhurbin {
 
         $(".modal-body").shouldBe(visible);
 
-        $$(".modal-body tbody tr")
-                .findBy(text("Student Name"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("John Shepard"));
+        $$(".modal-body tbody tr").findBy(text("Student Email")).shouldHave(text("JohnS@normandy.com"));
+        $$(".modal-body tbody tr").findBy(text("Gender")).shouldHave(text("Male"));
+        $$(".modal-body tbody tr").findBy(text("Mobile")).shouldHave(text("1877667623"));
+        $$(".modal-body tbody tr").findBy(text("Date of Birth")).shouldHave(text("11 April,2054"));
+        $$(".modal-body tbody tr").findBy(text("Subjects")).shouldHave(text("Computer Science"));
+        $$(".modal-body tbody tr").findBy(text("Hobbies")).shouldHave(text("Reading"));
+        $$(".modal-body tbody tr").findBy(text("Picture")).shouldHave(text("John_Shepard_29.jpg"));
+        $$(".modal-body tbody tr").findBy(text("Address")).shouldHave(text("Uss Normandy"));
+        $$(".modal-body tbody tr").findBy(text("State and City")).shouldHave(text("NCR Noida"));
 
-        $$(".modal-body tbody tr")
-                .findBy(text("Student Email"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("JohnS@normandy.com"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Gender"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("Male"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Mobile"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("1877667623"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Date of Birth"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("11 April,2054"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Subjects"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("Computer Science"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Hobbies"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("Reading"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Picture"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("John_Shepard_29.jpg"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("Address"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("Uss Normandy"));
-
-        $$(".modal-body tbody tr")
-                .findBy(text("State and City"))
-                .$("td:nth-child(2)")
-                .shouldHave(exactText("NCR Noida"));
     }
 }
 
