@@ -41,16 +41,17 @@ public class TestFillFormDZhurbin {
         $("#submit").click();
 
         $(".modal-body").shouldBe(visible);
+        $(".table-responsive").$(byText("Student Name")).closest("tr").shouldHave(text("John Shepard"));
+        $(".table-responsive").$(byText("Student Email")).closest("tr").shouldHave(text("JohnS@normandy.com"));
+        $(".table-responsive").$(byText("Gender")).closest("tr").shouldHave(text("Male"));
+        $(".table-responsive").$(byText("Mobile")).closest("tr").shouldHave(text("1877667623"));
+        $(".table-responsive").$(byText("Date of Birth")).closest("tr").shouldHave(text("11 April,2054"));
+        $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("Computer Science"));
+        $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Reading"));
+        $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("John_Shepard_29.jpg"));
+        $(".table-responsive").$(byText("Address")).closest("tr").shouldHave(text("Uss Normandy"));
+        $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("NCR Noida"));
 
-        $$(".modal-body tbody tr").findBy(text("Student Email")).shouldHave(text("JohnS@normandy.com"));
-        $$(".modal-body tbody tr").findBy(text("Gender")).shouldHave(text("Male"));
-        $$(".modal-body tbody tr").findBy(text("Mobile")).shouldHave(text("1877667623"));
-        $$(".modal-body tbody tr").findBy(text("Date of Birth")).shouldHave(text("11 April,2054"));
-        $$(".modal-body tbody tr").findBy(text("Subjects")).shouldHave(text("Computer Science"));
-        $$(".modal-body tbody tr").findBy(text("Hobbies")).shouldHave(text("Reading"));
-        $$(".modal-body tbody tr").findBy(text("Picture")).shouldHave(text("John_Shepard_29.jpg"));
-        $$(".modal-body tbody tr").findBy(text("Address")).shouldHave(text("Uss Normandy"));
-        $$(".modal-body tbody tr").findBy(text("State and City")).shouldHave(text("NCR Noida"));
 
     }
 }
