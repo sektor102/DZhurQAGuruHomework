@@ -6,7 +6,7 @@ group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 java {
-    toolchain { languageVersion = JavaLanguageVersion.of(17) } // или твой JDK
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
 }
 
 repositories {
@@ -14,9 +14,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.0-M2'
-    testImplementation 'com.codeborne:selenide:7.9.4' // актуальную версию можно обновить позже
-    testRuntimeOnly  'org.slf4j:slf4j-simple:2.0.17'  // чтобы видеть логи (по желанию)
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+
+    // Selenide
+    testImplementation 'com.codeborne:selenide:7.9.4'
+
+    // Логи (опционально)
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.17'
 }
 
 test {
