@@ -1,5 +1,6 @@
 package selenideHelper;
 
+
 import com.codeborne.selenide.*;
 import org.openqa.selenium.*;
 
@@ -11,7 +12,7 @@ import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
-
+@SuppressWarnings("all") // Что бы заглушить ошибки
 // this is not a full list, just the most common
 public class HelpSelenide {
 
