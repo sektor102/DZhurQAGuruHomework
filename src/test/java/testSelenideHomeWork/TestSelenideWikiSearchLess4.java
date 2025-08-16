@@ -10,18 +10,31 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TestSelenideWikiSearchLess4 {
     @BeforeAll
-    static void beforeAll() {
+    static void setupEnvironment () {
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
+        Configuration.baseUrl = "https://github.com";
     }
 
     @Test
-    void compareSelectors() {
-        open("https://github.com/selenide/selenide");
+    void searchGithubJUnit5SearchTest() {
+        open("/selenide/selenide");
         $("#wiki-tab").click();
         $("#wiki-body").$("a[href*='SoftAssertions']").shouldBe(visible).click();
-        $("#wiki-body").shouldHave(text("@ExtendWith"), text("SoftAssertsExtension"));
+        $("#wiki-body").shouldHave(text(
+                """
+                        @ExtendWith({SoftAssertsExtension.class})
+                        class Tests {
+                          @Test
+                          void test() {
+                            Configuration.assertionMode = SOFT;
+                            open("page.html");
+                        
+                            $("#first").should(visible).click();
+                            $("#second").should(visible).click();
+                          }
+                        }"""
+        ));
 
     }
 
