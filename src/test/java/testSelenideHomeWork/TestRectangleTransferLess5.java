@@ -20,7 +20,7 @@ public class TestRectangleTransferLess5 {
     }
 
     @Test
-    void TestRectangleTransferSelenideAction(){
+    void testRectangleTransferSelenideAction(){
         open("");
         SelenideElement elementA = $("#column-a");
         SelenideElement elementB = $("#column-b");
@@ -34,7 +34,7 @@ public class TestRectangleTransferLess5 {
     }
 
     @Test
-    void TestRectangleTransferDragAndDrop(){
+    void testRectangleTransferDragAndDrop(){
         open("");
         $("#column-a").dragAndDrop((DragAndDropOptions) DragAndDropOptions.to(Selenide.$("#column-b")));
         $("#column-a").shouldHave(text("B"));
