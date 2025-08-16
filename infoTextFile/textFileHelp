@@ -1,0 +1,5 @@
+clickAndHold() - зажать кнопку мыши
+release() - отпустить кнопку мыши
+
+//DevTools
+setTimeout(function () {debugger},4000);
