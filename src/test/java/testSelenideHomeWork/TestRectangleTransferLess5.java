@@ -1,14 +1,12 @@
 package testSelenideHomeWork;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.DragAndDropOptions;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.DragAndDropOptions.to;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestRectangleTransferLess5 {
@@ -22,6 +20,8 @@ public class TestRectangleTransferLess5 {
     @Test
     void testRectangleTransferSelenideAction(){
         open("");
+        $("#column-a").shouldHave(text("A"));
+        $("#column-b").shouldHave(text("B"));
         SelenideElement elementA = $("#column-a");
         SelenideElement elementB = $("#column-b");
         actions()
@@ -36,7 +36,9 @@ public class TestRectangleTransferLess5 {
     @Test
     void testRectangleTransferDragAndDrop(){
         open("");
-        $("#column-a").dragAndDrop((DragAndDropOptions) DragAndDropOptions.to(Selenide.$("#column-b")));
+        $("#column-a").shouldHave(text("A"));
+        $("#column-b").shouldHave(text("B"));
+        $("#column-a").dragAndDrop(to("#column-b"));
         $("#column-a").shouldHave(text("B"));
         $("#column-b").shouldHave(text("A"));
     }
