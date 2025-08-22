@@ -3,7 +3,7 @@ package testSelenideHomeWork;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
-public class TestFillFormPageObjectLess6FillFormLess6 extends TestBaseFillFormLess6 {
+public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test

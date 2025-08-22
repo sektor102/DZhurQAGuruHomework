@@ -112,9 +112,6 @@ public class RegistrationPage {
         $("#userNumber:invalid").should(exist);
         $$("#userForm input[name='gender']:invalid").shouldHave(size(3));
 
-
-
-
         return this;
     }
 
