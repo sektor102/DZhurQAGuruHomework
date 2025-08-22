@@ -1,17 +1,18 @@
 package pages;
 
 import pages.components.CalendarComponent;
-import pages.components.CheckFullComponent;
+import pages.components.CheckFillFormComponent;
 
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
+
 
 public class RegistrationPage {
     CalendarComponent calendarComponent = new CalendarComponent();
-    CheckFullComponent checkFullComponent = new CheckFullComponent();
+    CheckFillFormComponent checkFillFormComponent = new CheckFillFormComponent();
     private String firstName, lastName, email, gender, phone, dayB, monthB, yearB, subject, hobby, picture, address, state, city;
 
     private String getDobUi() {
@@ -104,9 +105,32 @@ public class RegistrationPage {
         return this;
     }
 
-    public void checkResultFull(){
-        checkFullComponent.fullCheck(firstName, lastName, email, gender, phone, getDobUi(), subject, hobby, picture, address, state, city);
+    public RegistrationPage notFillForm() {
+        $("#userForm").shouldHave(cssClass("was-validated"));
+        $("#firstName:invalid").should(exist);
+        $("#lastName:invalid").should(exist);
+        $("#userNumber:invalid").should(exist);
+        $$("#userForm input[name='gender']:invalid").shouldHave(size(3));
+
+
+
+
+        return this;
     }
+
+    public void checkResultPartial(){
+        checkFillFormComponent.partialCheck(firstName, lastName, gender, phone, getDobUi());
+    }
+
+    public void checkResultFull(){
+        checkFillFormComponent.fullCheck(firstName, lastName, email, gender, phone, getDobUi(), subject, hobby, picture, address, state, city);
+    }
+
+
+    public void checkNegative(){
+        checkFillFormComponent.negativeCheck();
+    }
+
 }
 
 

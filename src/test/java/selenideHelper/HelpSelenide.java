@@ -47,6 +47,11 @@ public class HelpSelenide {
 
     //примеры селекторов
     void selectors_examples() {
+
+        $("#userForm")     ;       // по id
+        $(".userForm") ;           // по классу
+        $("input[name='email']")  ;// по атрибуту name
+
         $("div").click(); // CSS-селектор: первый div
         element("div").click(); // то же самое, синоним $
 
