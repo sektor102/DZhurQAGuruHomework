@@ -6,35 +6,60 @@ import pages.RegistrationPage;
 public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
     RegistrationPage registrationPage = new RegistrationPage();
 
+    String first = "John";
+    String last  = "Shepard";
+    String email = "JohnS@normandy.com";
+    String gender = "Male";
+    String phone  = "1877667623";
+    String day = "11", month = "April", year = "2054";
+    String subject = "Computer Science";
+    String hobby = "Reading";
+    String picture = "John_Shepard_29.jpg";
+    String address = "Uss Normandy";
+    String state = "NCR", city = "Noida";
+
+
     @Test
     void fillFormTest() {
         registrationPage.openPage()
-                .firstName("John")
-                .lastName("Shepard")
-                .email("JohnS@normandy.com")
-                .gender("Male")
-                .numberPhone("1877667623")
-                .dateOfBirth("11", "April", "2054")
-                .subjects("Computer Science")
-                .hobbies("Reading")
-                .picture("John_Shepard_29.jpg")
-                .address("Uss Normandy")
-                .stateAndCity("NCR", "Noida")
+                .firstName(first)
+                .lastName(last)
+                .email(email)
+                .gender(gender)
+                .numberPhone(phone)
+                .dateOfBirth(day, month, year)
+                .subjects(subject)
+                .hobbies(hobby)
+                .picture(picture)
+                .address(address)
+                .stateAndCity(state, city)
                 .submit()
-                .checkResultFull();
+                .checkResult("Student Name", first + " " + last)
+                .checkResult("Student Email", email)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", phone)
+                .checkResult("Date of Birth", day + " " + month + "," + year)
+                .checkResult("Subjects", subject)
+                .checkResult("Hobbies", hobby)
+                .checkResult("Picture", picture)
+                .checkResult("Address", address)
+                .checkResult("State and City", state + " " + city);
 
     }
 
     @Test
     void fillPartialFormTest() {
         registrationPage.openPage()
-                .firstName("John")
-                .lastName("Shepard")
-                .gender("Male")
-                .numberPhone("1877667623")
-                .dateOfBirth("11", "April", "2054")
+                .firstName(first)
+                .lastName(last)
+                .gender(gender)
+                .numberPhone(phone)
+                .dateOfBirth(day, month, year)
                 .submit()
-                .checkResultPartial();
+                .checkResult("Student Name", first + " " + last)
+                .checkResult("Gender", gender)
+                .checkResult("Mobile", phone)
+                .checkResult("Date of Birth", day + " " + month + "," + year);
     }
 
     @Test
