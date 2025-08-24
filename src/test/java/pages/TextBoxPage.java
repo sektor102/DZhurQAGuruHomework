@@ -1,10 +1,24 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TextBoxPage {
     private String fullNameCheck, emailCheck, currentAddressCheck, permanentAddressCheck;
+
+    private final SelenideElement
+            fullNameInput = $("#userName"),
+            emailInput = $("#userEmail"),
+            addressInput = $("#currentAddress"),
+            permanentAddressInput = $("#permanentAddress"),
+            submitClick = $("#submit"),
+            outputName = $("#output #name"),
+            outputEmail = $("#output #email"),
+            outputcurrentAddress = $("#output #email"),
+            outputpermanentAddress = $("#output #permanentAddress");
+
 
 
     public TextBoxPage openPage() {
@@ -13,39 +27,39 @@ public class TextBoxPage {
     }
 
     public TextBoxPage fullName(String value){
-        $("#userName").setValue(value);
+        fullNameInput.setValue(value);
         this.fullNameCheck = value;
         return this;
     }
 
     public TextBoxPage email(String value){
-        $("#userEmail").setValue(value);
+        emailInput.setValue(value);
         this.emailCheck = value;
         return this;
     }
 
     public TextBoxPage currentAddress(String value){
-        $("#currentAddress").setValue(value);
+        addressInput.setValue(value);
         this.currentAddressCheck = value;
         return this;
     }
 
     public TextBoxPage permanentAddress(String value){
-        $("#permanentAddress").setValue(value);
+        permanentAddressInput.setValue(value);
         this.permanentAddressCheck = value;
         return this;
     }
 
     public TextBoxPage submit(){
-        $("#submit").click();
+        submitClick.click();
         return this;
     }
 
     public void checkFill(){
-        $("#output #name").shouldHave(text(fullNameCheck));
-        $("#output #email").shouldHave(text(emailCheck));
-        $("#output #currentAddress").shouldHave(text(currentAddressCheck));
-        $("#output #permanentAddress").shouldHave(text(permanentAddressCheck));
+        outputName.shouldHave(text(fullNameCheck));
+        outputEmail.shouldHave(text(emailCheck));
+        outputcurrentAddress.shouldHave(text(currentAddressCheck));
+        outputpermanentAddress.shouldHave(text(permanentAddressCheck));
     }
 
 }

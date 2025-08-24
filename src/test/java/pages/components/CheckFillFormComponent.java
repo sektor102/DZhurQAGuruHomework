@@ -1,41 +1,24 @@
 package pages.components;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Condition.*;
 
 public class CheckFillFormComponent {
-    public void fullCheck(String firstName, String lastName, String email,
-                          String gender, String phone, String dobUi,
-                          String subject, String hobby, String picture,
-                          String address, String state, String city) {
-        $(".modal-body").shouldBe(visible);
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
-        $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(email));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(gender));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(phone));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(dobUi));
-        $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subject));
-        $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text(hobby));
-        $(".table-responsive").$(byText("Picture")).parent().shouldHave(text(picture));
-        $(".table-responsive").$(byText("Address")).parent().shouldHave(text(address));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text(state + " " + city));
+    private final SelenideElement
+            modalDialog = $(".modal-dialog"),
+            formTable   = $(".table-responsive");
 
-    }
-    public void partialCheck(String firstName, String lastName, String gender, String phone, String dobUi){
-        $(".modal-body").shouldBe(visible);
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(gender));
-        $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(phone));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(dobUi));
-
-
-
+    public CheckFillFormComponent checkTable(String key, String value) {
+        modalDialog.should(appear);
+        formTable.$(byText(key)).parent().shouldHave(text(value));
+        return null;
     }
 
-    public void negativeCheck(){
-        $(".modal-body").shouldNot(visible);
+    public CheckFillFormComponent modalDialogNotAppear() {
+        modalDialog.shouldNot(appear);
+        return null;
     }
-
 }

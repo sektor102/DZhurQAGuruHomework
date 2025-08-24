@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
 import pages.components.CheckFillFormComponent;
 
@@ -19,40 +20,56 @@ public class RegistrationPage {
         return dayB + " " + monthB + "," + yearB;
     }
 
+    private final SelenideElement
+            firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            userEmailInput = $("#userEmail"),
+            genderInput = $("#genterWrapper"),
+            numberPhoneInput = $("#userNumber"),
+            subjectsInput = $("#subjectsContainer input"),
+            hobbiesInput = $("#hobbiesWrapper"),
+            pictureInput = $("#uploadPicture"),
+            addressInput = $("#currentAddress"),
+            stateContainer = $("#state"),
+            stateInput = $("#state input"),
+            cityContainer = $("#city"),
+            cityInput = $("#city input"),
+            submitClick = $("#submit");
+
     public RegistrationPage openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
-    return this;
+        return this;
 
     }
 
     public RegistrationPage firstName(String value){
-        $("#firstName").setValue(value);
+        firstNameInput.setValue(value);
         this.firstName = value;
         return this;
     }
 
     public RegistrationPage lastName(String value){
-        $("#lastName").setValue(value);
+        lastNameInput.setValue(value);
         this.lastName = value;
         return this;
     }
 
     public RegistrationPage email(String value){
-        $("#userEmail").setValue(value);
+        userEmailInput.setValue(value);
         this.email = value;
         return this;
     }
 
     public RegistrationPage gender(String value){
-        $("#genterWrapper").$(byText(value)).click();
+        genderInput.$(byText(value)).click();
         this.gender = value;
         return this;
     }
 
     public RegistrationPage numberPhone(String value){
-        $("#userNumber").setValue(value);
+        numberPhoneInput.setValue(value);
         this.phone = value;
         return this;
     }
@@ -66,41 +83,41 @@ public class RegistrationPage {
     }
 
     public RegistrationPage subjects(String value){
-        $("#subjectsContainer input").setValue(value).pressEnter();
+        subjectsInput.setValue(value).pressEnter();
         this.subject  = value;
         return this;
     }
 
     public RegistrationPage hobbies(String value){
-        $("#hobbiesWrapper").$(byText(value)).click();
+        hobbiesInput.$(byText(value)).click();
         this.hobby = value;
         return this;
     }
 
     public RegistrationPage picture(String value){
-        $("#uploadPicture").uploadFromClasspath(value);
+        pictureInput.uploadFromClasspath(value);
         this.picture = value;
         return this;
     }
 
     public RegistrationPage address(String value){
-        $("#currentAddress").setValue(value);
+        addressInput.setValue(value);
         this.address = value;
         return this;
     }
 
     public RegistrationPage stateAndCity(String state, String city){
-        $("#state").click();
-        $("#state input").setValue(state).pressEnter();
-        $("#city").click();
-        $("#city input").setValue(city).pressEnter();
+        stateContainer.click();
+        stateInput.setValue(state).pressEnter();
+        cityContainer.click();
+        cityInput.setValue(city).pressEnter();
         this.state = state;
         this.city  = city;
         return this;
     }
 
     public RegistrationPage submit(){
-        $("#submit").click();
+        submitClick.click();
 
         return this;
     }
@@ -115,18 +132,32 @@ public class RegistrationPage {
         return this;
     }
 
-    public void checkResultPartial(){
-        checkFillFormComponent.partialCheck(firstName, lastName, gender, phone, getDobUi());
-    }
-
     public void checkResultFull(){
-        checkFillFormComponent.fullCheck(firstName, lastName, email, gender, phone, getDobUi(), subject, hobby, picture, address, state, city);
+        checkFillFormComponent.checkTable("Student Name", firstName + " " + lastName);
+        checkFillFormComponent.checkTable("Student Email", email);
+        checkFillFormComponent.checkTable("Gender", gender);
+        checkFillFormComponent.checkTable("Mobile", phone);
+        checkFillFormComponent.checkTable("Date of Birth", getDobUi());
+        checkFillFormComponent.checkTable("Subjects", subject);
+        checkFillFormComponent.checkTable("Hobbies", hobby);
+        checkFillFormComponent.checkTable("Picture", picture);
+        checkFillFormComponent.checkTable("Address", address);
+        checkFillFormComponent.checkTable("State and City", state + " " + city);
     }
 
+    public void checkResultPartial(){
+        checkFillFormComponent.checkTable("Student Name", firstName + " " + lastName);
+        checkFillFormComponent.checkTable("Gender", gender);
+        checkFillFormComponent.checkTable("Mobile", phone);
+        checkFillFormComponent.checkTable("Date of Birth", getDobUi());
+    }
 
     public void checkNegative(){
-        checkFillFormComponent.negativeCheck();
+        checkFillFormComponent.modalDialogNotAppear();
     }
+
+
+
 
 }
 

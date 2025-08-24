@@ -9,6 +9,5 @@ public class CalendarComponent {
         $("#dateOfBirthInput").sendKeys(CONTROL, "a");
         $("#dateOfBirthInput").sendKeys(day, month, year, ENTER);
         $("#subjectsContainer").click();
-        $("#subjectsContainer").click();
     }
 }
