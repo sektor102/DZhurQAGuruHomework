@@ -1,14 +1,14 @@
-package testSelenideHomeWork;
+package homeWorkCodeAutoTest;
 
 import org.junit.jupiter.api.Test;
-import pages.TextBoxPage;
+import pages.TextBoxPageLess6;
 
-public class TestTextBoxLess6 extends TestBaseFillFormLess6 {
-    TextBoxPage textBoxPage = new TextBoxPage();
+public class TestTextBoxBaseFillFormLess6 extends TestBaseFillFormLess6 {
+    TextBoxPageLess6 textBoxPageLess6 = new TextBoxPageLess6();
 
     @Test
     void fillTextBoxTest() {
-        textBoxPage.openPage()
+        textBoxPageLess6.openPage()
                 .fullName("John Shepard")
                 .email("JohnS@normandy.com")
                 .currentAddress("Uss Normandy")

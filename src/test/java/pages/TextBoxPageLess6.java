@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
-public class TextBoxPage {
+public class TextBoxPageLess6 {
     private String fullNameCheck, emailCheck, currentAddressCheck, permanentAddressCheck;
 
     private final SelenideElement
@@ -21,36 +21,36 @@ public class TextBoxPage {
 
 
 
-    public TextBoxPage openPage() {
+    public TextBoxPageLess6 openPage() {
         open("/text-box");
         return this;
     }
 
-    public TextBoxPage fullName(String value){
+    public TextBoxPageLess6 fullName(String value){
         fullNameInput.setValue(value);
         this.fullNameCheck = value;
         return this;
     }
 
-    public TextBoxPage email(String value){
+    public TextBoxPageLess6 email(String value){
         emailInput.setValue(value);
         this.emailCheck = value;
         return this;
     }
 
-    public TextBoxPage currentAddress(String value){
+    public TextBoxPageLess6 currentAddress(String value){
         addressInput.setValue(value);
         this.currentAddressCheck = value;
         return this;
     }
 
-    public TextBoxPage permanentAddress(String value){
+    public TextBoxPageLess6 permanentAddress(String value){
         permanentAddressInput.setValue(value);
         this.permanentAddressCheck = value;
         return this;
     }
 
-    public TextBoxPage submit(){
+    public TextBoxPageLess6 submit(){
         submitClick.click();
         return this;
     }

@@ -3,7 +3,7 @@ package pages.components;
 import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.Keys.*;
 
-public class CalendarComponent {
+public class CalendarComponentLess6 {
     public void setDate(String day, String month, String year){
 
         $("#dateOfBirthInput").sendKeys(COMMAND, "a");

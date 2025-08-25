@@ -1,10 +1,10 @@
-package testSelenideHomeWork;
+package homeWorkCodeAutoTest;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
+import pages.RegistrationPageLess6;
 
 public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
-    RegistrationPage registrationPage = new RegistrationPage();
+    RegistrationPageLess6 registrationPageLess6 = new RegistrationPageLess6();
 
     String first = "John";
     String last  = "Shepard";
@@ -21,7 +21,7 @@ public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
 
     @Test
     void fillFormTest() {
-        registrationPage.openPage()
+        registrationPageLess6.openPage()
                 .firstName(first)
                 .lastName(last)
                 .email(email)
@@ -49,7 +49,7 @@ public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
 
     @Test
     void fillPartialFormTest() {
-        registrationPage.openPage()
+        registrationPageLess6.openPage()
                 .firstName(first)
                 .lastName(last)
                 .gender(gender)
@@ -64,7 +64,7 @@ public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
 
     @Test
     void negativeFillFormTest() {
-        registrationPage.openPage()
+        registrationPageLess6.openPage()
                 .submit()
                 .notFillForm()
                 .checkNegative();

@@ -1,4 +1,4 @@
-package testSelenideHomeWork;
+package homeWorkCodeAutoTest;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
