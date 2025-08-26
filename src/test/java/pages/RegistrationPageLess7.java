@@ -64,31 +64,19 @@ public class RegistrationPageLess7 {
         return this;
     }
 
-    public RegistrationPageLess7 dateOfBirth(String day, String month, String year){
+    public RegistrationPageLess7 dateOfBirth(String day, String month, String year) {
         calendarComponentLess6.setDate(day, month, year);
         return this;
     }
 
     public RegistrationPageLess7 subjects(String value) {
-        if (value == null || value.isBlank()) return this;
-
-        for (String raw : value.split(",")) {
-            String label = raw.trim();
-            if (label.isEmpty()) continue;
-
-            subjectsInput.scrollIntoView(true).click();
-            subjectsInput.setValue(label);
-            subjectsInput.pressEnter();
-        }
+        subjectsInput.setValue(value).pressEnter();
         return this;
     }
 
 
     public RegistrationPageLess7 hobbies(String value) {
-        String[] hobbies = value.split(",");
-        for (String hobby : hobbies) {
-            hobbiesInput.$(byText(hobby.trim())).click();
-        }
+        hobbiesInput.$(byText(value)).click();
         return this;
     }
 

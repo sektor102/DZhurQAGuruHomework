@@ -15,7 +15,7 @@ public class TestFillFormPageObjectRandomLess7 extends TestBaseFillFormLess6 {
     String gender = getRandomGender();
     String phone  = getRandomPhone();
     String day = getDay(), month = getMonth(), year = getYear();
-    String subject = getRandomSubject(1, 8);
+    String subject = getRandomSubject();
     String hobby = getRandomHobbies();
     String picture = getPicture();
     String address = getAddress();
