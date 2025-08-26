@@ -3,7 +3,6 @@ package utils;
 import com.github.javafaker.Faker;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomGenerationLess7 {
     private static final Faker faker = new Faker(new Locale("en-US"));
@@ -64,10 +63,6 @@ public class RandomGenerationLess7 {
     public static String getYear()  { if (year == null)  generateBirthday(1970, 2015); return year; }
 
 
-    public static int getRandomInt(int min, int max) {
-        return ThreadLocalRandom.current().nextInt(min, max + 1);
-    }
-
     public static String getRandomPhone() {
         return faker.number().digits(10);
     }
@@ -77,12 +72,6 @@ public class RandomGenerationLess7 {
         return faker.options().option("Male","Female","Other");
     }
 
-
-    public static String getRandomItemFromArray(String[] array) {
-        int index = getRandomInt(0, array.length - 1);
-
-        return array[index];
-    }
 
     public static String getRandomHobbies() {
         return faker.options().option("Sports", "Reading", "Music");
@@ -102,17 +91,14 @@ public class RandomGenerationLess7 {
     }
 
     public static String getState() {
-        String[] state = {"NCR", "Uttar Pradesh", "Haryana", "Rajasthan"};
-        return getRandomItemFromArray(state);
-    }
-
-    public static String getCity(String state) {
+        return faker.options().option("NCR", "Uttar Pradesh", "Haryana", "Rajasthan"); }
+    public static String getCity (String state) {
         return switch (state) {
-            case "NCR" -> getRandomItemFromArray(new String[]{"Delhi", "Gurgaon", "Noida"});
-            case "Uttar Pradesh" -> getRandomItemFromArray(new String[]{"Agra", "Lucknow", "Merrut"});
-            case "Haryana" -> getRandomItemFromArray(new String[]{"Karnal", "Panipat"});
-            case "Rajasthan" -> getRandomItemFromArray(new String[]{"Jaipur", "Jaiselmer"});
-            default -> throw new IllegalArgumentException("Unknown state: " + state);
+            case "NCR" -> faker.options().option("Delhi", "Gurgaon", "Noida");
+            case "Uttar Pradesh" -> faker.options().option("Agra", "Lucknow", "Merrut");
+            case "Haryana" -> faker.options().option("Karnal", "Panipat");
+            case "Rajasthan" -> faker.options().option("Jaipur", "Jaiselmer");
+            default -> null;
         };
 
     }
