@@ -1,5 +1,6 @@
-package homeWorkCodeAutoTest;
+package guru.qa.dZhurHomeWork.less7;
 
+import guru.qa.dZhurHomeWork.less6.TestBaseFillFormLess6;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPageLess7;
 

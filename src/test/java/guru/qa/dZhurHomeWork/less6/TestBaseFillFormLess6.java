@@ -1,4 +1,4 @@
-package homeWorkCodeAutoTest;
+package guru.qa.dZhurHomeWork.less6;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;

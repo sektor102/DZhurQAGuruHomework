@@ -1,9 +1,8 @@
-// заменяет предыдущий SubjectsHarvester
+package guru.qa.dZhurHomeWork.noneLessFiles;// заменяет предыдущий SubjectsHarvester
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
@@ -43,7 +42,7 @@ public final class SubjectsHarvester {
 
         Path out = Paths.get("src/test/resources/subjects.csv");
         Files.createDirectories(out.getParent());
-        Files.write(out, String.join("\n", uniq).getBytes(StandardCharsets.UTF_8));
+        Files.writeString(out, String.join("\n", uniq));
 
         System.out.println("Saved: " + out.toAbsolutePath());
         closeWebDriver();

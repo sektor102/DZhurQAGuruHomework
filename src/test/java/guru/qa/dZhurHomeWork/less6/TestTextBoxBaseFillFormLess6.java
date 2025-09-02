@@ -1,4 +1,4 @@
-package homeWorkCodeAutoTest;
+package guru.qa.dZhurHomeWork.less6;
 
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPageLess6;

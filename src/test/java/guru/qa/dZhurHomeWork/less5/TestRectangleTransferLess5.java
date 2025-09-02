@@ -1,4 +1,4 @@
-package homeWorkCodeAutoTest;
+package guru.qa.dZhurHomeWork.less5;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
