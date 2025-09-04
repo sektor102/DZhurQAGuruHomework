@@ -2,6 +2,7 @@ package guru.qa.dZhurHomeWork.less8;
 
 import guru.qa.dZhurHomeWork.less8.data.Language;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -44,7 +45,8 @@ public class searchMovieAndCheckMoviePage {
     })
     @ParameterizedTest(name = "Для фильма {0} есть своя страница")
     @Tag("Smoke")
-    void searchMovieAndCheckResultSearch(String movie) {
+    @DisplayName("Проверяем что у фильма есть своя страница и название фильма корректно")
+    void searchMovieAndCheckResultSearchAndCheckNameFilmInFilmSite(String movie) {
         $(".Search-input").setValue(movie);
         $(".custom-scrollbar").shouldBe(visible, Duration.ofSeconds(30));
         $(".search-results__movies").$(byText(movie)).click();
@@ -54,7 +56,9 @@ public class searchMovieAndCheckMoviePage {
 
     @EnumSource(Language.class)
     @ParameterizedTest
-    void checkLanguageOnSite(Language language){
+    @DisplayName("Проверяем переключение языка и перевод 1-й карусели")
+    @Tag("Smoke")
+    void checkLanguageOnSiteAndCheckNameBestSector(Language language){
         $(".LangSwitcher-current").click();
         $$(".LangSwitcher-optionText").find(text(language.name())).click();
         $(".PopularShows__title").shouldHave(text(language.description));
@@ -66,7 +70,8 @@ public class searchMovieAndCheckMoviePage {
     })
     @ParameterizedTest(name = "Для поиска сериала {0} есть сериал с ссылкой {1}")
     @Tag("Functional")
-    void searchSerialsAndCheckUrl(String searchQuery, String expectedLink){
+    @DisplayName("Проверяем что ссылка у сериала корректная")
+    void searchSerialsAndCheckUrlSerials(String searchQuery, String expectedLink){
         $(".Search-input").setValue(searchQuery);
         $(".custom-scrollbar").shouldBe(visible, Duration.ofSeconds(30));
         $(".ShowCol-title").$(byText(expectedLink));
