@@ -1,7 +1,7 @@
 package guru.qa.dZhurHomeWork.less6;
 
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPageLess6;
+import pages.less6.RegistrationPageLess6;
 
 public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
     RegistrationPageLess6 registrationPageLess6 = new RegistrationPageLess6();
