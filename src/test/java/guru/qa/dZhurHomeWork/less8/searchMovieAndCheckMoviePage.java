@@ -46,7 +46,7 @@ public class searchMovieAndCheckMoviePage {
     @ParameterizedTest(name = "Для фильма {0} есть своя страница")
     @Tag("Smoke")
     @DisplayName("Проверяем что у фильма есть своя страница и название фильма корректно")
-    void searchMovieAndCheckResultSearchAndCheckNameFilmInFilmSite(String movie) {
+    void searchMovieAndCheckResultSearchAndCheckNameFilmInFilmSiteTest(String movie) {
         $(".Search-input").setValue(movie);
         $(".custom-scrollbar").shouldBe(visible, Duration.ofSeconds(30));
         $(".search-results__movies").$(byText(movie)).click();
@@ -58,7 +58,7 @@ public class searchMovieAndCheckMoviePage {
     @ParameterizedTest
     @DisplayName("Проверяем переключение языка и перевод 1-й карусели")
     @Tag("Smoke")
-    void checkLanguageOnSiteAndCheckNameBestSector(Language language){
+    void checkLanguageOnSiteAndCheckNameBestSectorTest(Language language){
         $(".LangSwitcher-current").click();
         $$(".LangSwitcher-optionText").find(text(language.name())).click();
         $(".PopularShows__title").shouldHave(text(language.description));
@@ -71,7 +71,7 @@ public class searchMovieAndCheckMoviePage {
     @ParameterizedTest(name = "Для поиска сериала {0} есть сериал с ссылкой {1}")
     @Tag("Functional")
     @DisplayName("Проверяем что ссылка у сериала корректная")
-    void searchSerialsAndCheckUrlSerials(String searchQuery, String expectedLink){
+    void searchSerialsAndCheckUrlSerialsTest(String searchQuery, String expectedLink){
         $(".Search-input").setValue(searchQuery);
         $(".custom-scrollbar").shouldBe(visible, Duration.ofSeconds(30));
         $(".ShowCol-title").$(byText(expectedLink));
