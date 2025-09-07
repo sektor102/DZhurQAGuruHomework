@@ -17,11 +17,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class searchMovieAndCheckMoviePage {
+public class SearchMovieAndCheckMoviePage {
 
 
     @BeforeEach
-    void PreCondition() {
+    void preCondition() {
         open("https://myshows.me/");
         clearBrowserCookies();
         clearBrowserLocalStorage();
@@ -30,13 +30,11 @@ public class searchMovieAndCheckMoviePage {
 
     void closeCookiesIfPresent() {
         try {
-            // даём попапу короткое окно на появление
             $(".CookiesPopup__button")
                     .should(appear, Duration.ofSeconds(2))
                     .click();
-            $(".CookiesPopup").should(disappear); // если есть контейнер
+            $(".CookiesPopup").should(disappear);
         } catch (AssertionError ignored) {
-            // попап не появился — едем дальше
         }
     }
 
@@ -46,7 +44,7 @@ public class searchMovieAndCheckMoviePage {
     @ParameterizedTest(name = "Для фильма {0} есть своя страница")
     @Tag("Smoke")
     @DisplayName("Проверяем что у фильма есть своя страница и название фильма корректно")
-    void searchMovieAndCheckResultSearchAndCheckNameFilmInFilmSiteTest(String movie) {
+    void searchMovieAndCheckResultCheckNameFilmInFilmPageTest(String movie) {
         $(".Search-input").setValue(movie);
         $(".custom-scrollbar").shouldBe(visible, Duration.ofSeconds(30));
         $(".search-results__movies").$(byText(movie)).click();
