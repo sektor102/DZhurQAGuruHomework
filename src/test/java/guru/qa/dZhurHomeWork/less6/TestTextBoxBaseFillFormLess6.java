@@ -1,7 +1,7 @@
 package guru.qa.dZhurHomeWork.less6;
 
 import org.junit.jupiter.api.Test;
-import pages.TextBoxPageLess6;
+import pages.less6.TextBoxPageLess6;
 
 public class TestTextBoxBaseFillFormLess6 extends TestBaseFillFormLess6 {
     TextBoxPageLess6 textBoxPageLess6 = new TextBoxPageLess6();
