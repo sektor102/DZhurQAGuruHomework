@@ -14,7 +14,7 @@ public class TestFillFormPageObjectLess6 extends TestBaseFillFormLess6 {
     String day = "11", month = "April", year = "2054";
     String subject = "Computer Science";
     String hobby = "Reading";
-    String picture = "John_Shepard_29.jpg";
+    String picture = "less6_7/John_Shepard_29.jpg";
     String address = "Uss Normandy";
     String state = "NCR", city = "Noida";
 

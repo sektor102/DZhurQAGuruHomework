@@ -32,7 +32,7 @@ public class TestFillFormDZhurbinLess3 {
         $("#subjectsContainer").click();
         $("#subjectsContainer input").setValue("Computer Science").pressEnter();
         $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#uploadPicture").uploadFromClasspath("John_Shepard_29.jpg");
+        $("#uploadPicture").uploadFromClasspath("less6_7/John_Shepard_29.jpg");
         $("#currentAddress").setValue("Uss Normandy");
         $("#lastName").setValue("Shepard");
         $("#userEmail").setValue("JohnS@normandy.com");
@@ -50,7 +50,7 @@ public class TestFillFormDZhurbinLess3 {
         $(".table-responsive").$(byText("Date of Birth")).closest("tr").shouldHave(text("11 April,2054"));
         $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("Computer Science"));
         $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Reading"));
-        $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("John_Shepard_29.jpg"));
+        $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("less6_7/John_Shepard_29.jpg"));
         $(".table-responsive").$(byText("Address")).closest("tr").shouldHave(text("Uss Normandy"));
         $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("NCR Noida"));
 

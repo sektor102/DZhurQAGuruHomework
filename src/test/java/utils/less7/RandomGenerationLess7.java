@@ -10,16 +10,16 @@ public class RandomGenerationLess7 {
     private static String month;
     private static String year;
     private static final String[] PICTURES = {
-            "Witcher 3 Wild Hunt, The - avatar 01.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 02.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 03.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 04.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 05.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 06.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 07.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 08.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 09.jpg",
-            "Witcher 3 Wild Hunt, The - avatar 10.jpg"
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 01.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 02.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 03.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 04.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 05.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 06.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 07.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 08.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 09.jpg",
+            "less6_7/Witcher 3 Wild Hunt, The - avatar 10.jpg"
     };
 
     public static void main(String[] args) {
