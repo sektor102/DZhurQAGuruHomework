@@ -1,0 +1,8 @@
+{
+  "name": "Company Ltd",
+  "city": "Moscow",
+  "employees": [
+    { "id": "CN001", "lastName": "Иванова", "firstName": "Ирина", "dept": "OU001" },
+    { "id": "CN002", "lastName": "Сергеев", "firstName": "Константин", "dept": "OU002" }
+  ]
+}

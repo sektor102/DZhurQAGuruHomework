@@ -24,6 +24,18 @@ dependencies {
 
     // Рандомные данные
     implementation 'com.github.javafaker:javafaker:1.0.2'
+
+    //
+    testImplementation 'commons-io:commons-io:2.20.0'
+    testImplementation 'com.codeborne:pdf-test:2.0.0'
+    testImplementation 'com.codeborne:xls-test:1.7.2'
+    testImplementation 'org.apache.poi:poi:5.2.5'
+    testImplementation 'org.apache.poi:poi-ooxml:5.2.5'
+    testImplementation 'com.opencsv:opencsv:5.12.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.20.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+
 }
 
 test {
