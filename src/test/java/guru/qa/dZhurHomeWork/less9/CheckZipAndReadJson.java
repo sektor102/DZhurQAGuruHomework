@@ -22,7 +22,10 @@ public class CheckZipAndReadJson {
 
     @Test
     void zipContainsPdfWithExpectedContent() throws Exception {
-        try (ZipInputStream zis = new ZipInputStream(cl.getResourceAsStream("less9/Test.zip"))) {
+        try (ZipInputStream zis = new ZipInputStream(
+                cl.getResourceAsStream("less9/Test.zip"),
+                java.nio.charset.Charset.forName("Windows-1251")
+        )) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (!entry.getName().endsWith(".pdf")) continue;
@@ -43,7 +46,9 @@ public class CheckZipAndReadJson {
     @Test
     void zipContainsXlsxWithExpectedContent() throws Exception {
         try (ZipInputStream zis = new ZipInputStream(
-                cl.getResourceAsStream("less9/Test.zip"))) {
+                cl.getResourceAsStream("less9/Test.zip"),
+                java.nio.charset.Charset.forName("Windows-1251")
+        )) {
 
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
@@ -145,5 +150,3 @@ public class CheckZipAndReadJson {
         }
     }
 }
-
-// для коммита
