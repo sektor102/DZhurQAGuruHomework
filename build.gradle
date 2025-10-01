@@ -1,0 +1,107 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0'
+}
+
+wrapper {
+    gradleVersion = '8.10.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+def allureVersion = '2.29.0'
+def aspectJVersion = '1.9.22'
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
+    }
+}
+
+allure {
+    version.set("2.35.1")   // версия Allure Commandline для отчёта
+    adapter {
+        frameworks {
+            junit5 { enabled.set(true) }
+        }
+    }
+}
+
+dependencies {
+
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter:5.11.0',
+            'com.codeborne:selenide:7.9.4',
+            'commons-io:commons-io:2.20.0',
+            'com.codeborne:pdf-test:2.0.0',
+            'com.codeborne:xls-test:1.7.2',
+            'org.apache.poi:poi:5.2.5',
+            'org.apache.poi:poi-ooxml:5.4.1',
+            'com.opencsv:opencsv:5.12.0',
+            'com.fasterxml.jackson.core:jackson-databind:2.20.0',
+            platform("io.qameta.allure:allure-bom:$allureVersion"),
+            'io.qameta.allure:allure-junit5',
+            'io.qameta.allure:allure-selenide:2.29.1',
+            platform("org.junit:junit-bom:5.11.3"),
+            'org.junit.jupiter:junit-jupiter-api'
+    )
+
+    testRuntimeOnly (
+            "org.junit.jupiter:junit-jupiter-engine",
+            'org.slf4j:slf4j-simple:2.0.17'
+
+    )
+
+    implementation (
+            'net.datafaker:datafaker:2.4.4',
+            'com.fasterxml.jackson.core:jackson-core:2.20.0',
+            'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+
+    )
+
+    test {
+        ignoreFailures = true
+        useJUnitPlatform()
+        jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
+    }
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+def ts = new java.text.SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date())
+
+tasks.register("allureReportTs") {
+    dependsOn "allureReport"
+    doLast {
+        copy {
+            from "$buildDir/reports/allure-report"
+            into "$buildDir/reports/allure-report-${ts}"
+        }
+        println "Saved: $buildDir/reports/allure-report-${ts}"
+    }
+}
