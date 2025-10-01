@@ -1,8 +1,8 @@
-package pages;
+package pages.less6;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.components.CalendarComponentLess6;
-import pages.components.CheckFillFormComponentLess7;
+import pages.components.less6.CalendarComponentLess6;
+import pages.components.less6.CheckFillFormComponentLess6;
 
 
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class RegistrationPageLess7 {
-    CalendarComponentLess6 calendarComponentLess6 = new CalendarComponentLess6();
-    CheckFillFormComponentLess7 checkFillFormComponentLess7 = new CheckFillFormComponentLess7();
+public class RegistrationPageLess6 {
+    CalendarComponentLess6 calendarComponent = new CalendarComponentLess6();
+    CheckFillFormComponentLess6 checkFillFormComponent = new CheckFillFormComponentLess6();
 
     private final SelenideElement
             firstNameInput = $("#firstName"),
@@ -31,7 +31,7 @@ public class RegistrationPageLess7 {
             cityInput = $("#city input"),
             submitClick = $("#submit");
 
-    public RegistrationPageLess7 openPage() {
+    public RegistrationPageLess6 openPage() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
 
@@ -39,59 +39,57 @@ public class RegistrationPageLess7 {
 
     }
 
-    public RegistrationPageLess7 firstName(String value){
+    public RegistrationPageLess6 firstName(String value){
         firstNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageLess7 lastName(String value){
+    public RegistrationPageLess6 lastName(String value){
         lastNameInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageLess7 email(String value){
+    public RegistrationPageLess6 email(String value){
         userEmailInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageLess7 gender(String value){
+    public RegistrationPageLess6 gender(String value){
         genderInput.$(byText(value)).click();
         return this;
     }
 
-    public RegistrationPageLess7 numberPhone(String value){
+    public RegistrationPageLess6 numberPhone(String value){
         numberPhoneInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageLess7 dateOfBirth(String day, String month, String year) {
-        calendarComponentLess6.setDate(day, month, year);
+    public RegistrationPageLess6 dateOfBirth(String day, String month, String year){
+        calendarComponent.setDate(day, month, year);
         return this;
     }
 
-    public RegistrationPageLess7 subjects(String value) {
+    public RegistrationPageLess6 subjects(String value){
         subjectsInput.setValue(value).pressEnter();
         return this;
     }
 
-
-    public RegistrationPageLess7 hobbies(String value) {
+    public RegistrationPageLess6 hobbies(String value){
         hobbiesInput.$(byText(value)).click();
         return this;
     }
 
-
-    public RegistrationPageLess7 picture(String classpathPath) {
-        pictureInput.uploadFromClasspath(classpathPath);
+    public RegistrationPageLess6 picture(String value){
+        pictureInput.uploadFromClasspath(value);
         return this;
     }
 
-    public RegistrationPageLess7 address(String value){
+    public RegistrationPageLess6 address(String value){
         addressInput.setValue(value);
         return this;
     }
 
-    public RegistrationPageLess7 stateAndCity(String state, String city){
+    public RegistrationPageLess6 stateAndCity(String state, String city){
         stateContainer.click();
         stateInput.setValue(state).pressEnter();
         cityContainer.click();
@@ -99,13 +97,13 @@ public class RegistrationPageLess7 {
         return this;
     }
 
-    public RegistrationPageLess7 submit(){
+    public RegistrationPageLess6 submit(){
         submitClick.click();
 
         return this;
     }
 
-    public RegistrationPageLess7 notFillForm() {
+    public RegistrationPageLess6 notFillForm() {
         $("#userForm").shouldHave(cssClass("was-validated"));
         $("#firstName:invalid").should(exist);
         $("#lastName:invalid").should(exist);
@@ -116,20 +114,15 @@ public class RegistrationPageLess7 {
     }
 
     public void checkNegative(){
-        checkFillFormComponentLess7.modalDialogNotAppear();
+        checkFillFormComponent.modalDialogNotAppear();
     }
 
-    public RegistrationPageLess7 checkResult(String key, String value) {
-        if (value == null || value.isBlank()) return this;
-        checkFillFormComponentLess7.checkTable(key, value);
+    public RegistrationPageLess6 checkResult(String key, String value) {
+        checkFillFormComponent.checkTable(key, value);
+
         return this;
     }
 
 
 
-
 }
-
-
-
-
