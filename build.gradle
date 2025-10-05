@@ -106,7 +106,7 @@ tasks.register("allureReportTs") {
     }
 }
 
-task Baikal(type: Test) {
+tasks.register('Baikal', Test) {
     useJUnitPlatform {
         includeTags("demoqa")
     }
