@@ -38,7 +38,7 @@ configurations {
 }
 
 allure {
-    version.set("2.35.1")   // версия Allure Commandline для отчёта
+    version.set("2.35.1")
     adapter {
         frameworks {
             junit5 { enabled.set(true) }
@@ -103,5 +103,11 @@ tasks.register("allureReportTs") {
             into "$buildDir/reports/allure-report-${ts}"
         }
         println "Saved: $buildDir/reports/allure-report-${ts}"
+    }
+}
+
+task Baikal(type: Test) {
+    useJUnitPlatform {
+        includeTags("demoqa")
     }
 }

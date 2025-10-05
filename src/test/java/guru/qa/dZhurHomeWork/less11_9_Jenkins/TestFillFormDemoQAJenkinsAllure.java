@@ -50,7 +50,7 @@ public class TestFillFormDemoQAJenkinsAllure {
     }
 
     @Test
-    @Tag("2Baikal")
+    @Tag("Baikal")
     void fillFormTestJenkinsAllure() {
         step("Открываем страницу формы для заполнения " + repository, () -> {
             open(repository);
