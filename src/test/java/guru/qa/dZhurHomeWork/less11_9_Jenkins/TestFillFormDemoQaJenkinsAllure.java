@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class TestFillFormDemoQAJenkinsAllure {
+public class TestFillFormDemoQaJenkinsAllure {
     public static final String repository = "/automation-practice-form";
 
     @BeforeAll
