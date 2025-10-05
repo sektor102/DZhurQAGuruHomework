@@ -1,6 +1,6 @@
 package utils.less7;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 
 import java.util.*;
 
