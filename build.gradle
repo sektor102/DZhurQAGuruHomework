@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id 'java'
     id 'io.qameta.allure' version '2.12.0'
@@ -93,18 +95,19 @@ test {
     useJUnitPlatform()
 }
 
-def ts = new java.text.SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date())
+def ts = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date())
 
 tasks.register("allureReportTs") {
-    dependsOn "allureReport"
+    dependsOn(tasks.named("allureReport"))
     doLast {
         copy {
-            from "$buildDir/reports/allure-report"
-            into "$buildDir/reports/allure-report-${ts}"
+            from(layout.buildDirectory.dir("reports/allure-report"))
+            into(layout.buildDirectory.dir("reports/allure-report-${ts}"))
         }
-        println "Saved: $buildDir/reports/allure-report-${ts}"
+        println("Saved: ${layout.buildDirectory.get()}/reports/allure-report-${ts}")
     }
 }
+
 
 tasks.register('Baikal', Test) {
     useJUnitPlatform {
