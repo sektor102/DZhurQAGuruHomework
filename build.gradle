@@ -40,10 +40,15 @@ configurations {
 }
 
 allure {
-    version.set("2.35.1")
+    report {
+        version.set(allureVersion)
+    }
     adapter {
+        aspectjWeaver.set(true)
         frameworks {
-            junit5 { enabled.set(true) }
+            junit5 {
+                adapterVersion.set(allureVersion)
+            }
         }
     }
 }
