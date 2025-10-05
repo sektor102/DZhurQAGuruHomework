@@ -16,8 +16,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class TestFillFormDemoQaJenkinsAllure {
@@ -54,6 +53,8 @@ public class TestFillFormDemoQaJenkinsAllure {
     void fillFormTestJenkinsAllure() {
         step("Открываем страницу формы для заполнения " + repository, () -> {
             open(repository);
+            executeJavaScript("$('#fixedban').remove()");
+            executeJavaScript("$('footer').remove()");
         });
 
         step("Заполняем форму DemoQA", () -> {
@@ -90,7 +91,7 @@ public class TestFillFormDemoQaJenkinsAllure {
             $(".table-responsive").$(byText("Date of Birth")).closest("tr").shouldHave(text("11 April,2054"));
             $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("Computer Science"));
             $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Reading"));
-            $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("less6_7/John_Shepard_29.jpg"));
+            $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("John_Shepard_29.jpg"));
             $(".table-responsive").$(byText("Address")).closest("tr").shouldHave(text("Uss Normandy"));
             $(".table-responsive").$(byText("State and City")).closest("tr").shouldHave(text("NCR Noida"));
         });

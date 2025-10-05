@@ -116,6 +116,6 @@ tasks.register("allureReportTs") {
 
 tasks.register('Baikal', Test) {
     useJUnitPlatform {
-        includeTags("demoqa")
+        includeTags("Baikal")
     }
 }
