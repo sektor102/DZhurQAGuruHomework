@@ -30,10 +30,14 @@ public class Attach {
     }
 
     public static void browserConsoleLogs() {
-        attachAsText(
-                "Browser console logs",
-                String.join("\n", Selenide.getWebDriverLogs(BROWSER))
-        );
+        if (!com.codeborne.selenide.Configuration.browser.equals("firefox")) {
+            attachAsText(
+                    "Browser console logs",
+                    String.join("\n", Selenide.getWebDriverLogs(BROWSER))
+            );
+        } else {
+            io.qameta.allure.Allure.step("⚠️ Пропускаем сбор логов — Firefox КОНЧЕННЫЙ не поддерживает browser console logs через WebDriver");
+        }
     }
 
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
