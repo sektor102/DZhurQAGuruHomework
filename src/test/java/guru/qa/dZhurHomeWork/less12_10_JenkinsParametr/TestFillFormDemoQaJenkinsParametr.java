@@ -22,11 +22,15 @@ import static io.qameta.allure.Allure.step;
 public class TestFillFormDemoQaJenkinsParametr {
     public static final String repository = "/automation-practice-form";
 
+
+
     @BeforeAll
     static void beforeAll() {
+        String combo = System.getProperty("browserAndVersion");
+        String[] parts = combo.split("_");
         Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.browser = System.getProperty("browser");
-        Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.browser = parts[0];
+        Configuration.browserVersion = parts[1];
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         String urlSelenide = System.getProperty("urlSelenide");
