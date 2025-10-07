@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
-
+@Tag("Baikal2")
 public class TestFillFormDemoQaJenkinsParametr {
     public static final String repository = "/automation-practice-form";
 
@@ -53,7 +53,6 @@ public class TestFillFormDemoQaJenkinsParametr {
     }
 
     @Test
-    @Tag("Baikal2")
     void fillFormTestJenkinsAllure() {
         step("Открываем страницу формы для заполнения " + repository, () -> {
             open(repository);
