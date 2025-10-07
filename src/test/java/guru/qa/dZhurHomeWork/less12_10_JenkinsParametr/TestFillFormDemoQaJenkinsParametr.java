@@ -56,6 +56,7 @@ public class TestFillFormDemoQaJenkinsParametr {
     void TestFillFormDemoQaJenkinsParametr() {
         step("Открываем страницу формы для заполнения " + repository, () -> {
             open(repository);
+            $("body").shouldBe(visible);
             executeJavaScript("$('#fixedban').remove()");
             executeJavaScript("$('footer').remove()");
         });
