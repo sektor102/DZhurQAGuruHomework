@@ -26,6 +26,13 @@ public class TestFillFormDemoQaJenkinsParametr {
 
     @BeforeAll
     static void beforeAll() {
+        System.out.println(">>> browserAndVersion in JVM = " + System.getProperty("browserAndVersion"));
+        System.out.println(">>> all browser props in JVM:");
+        System.getProperties().forEach((k, v) -> {
+            if (String.valueOf(k).toLowerCase().contains("browser")) {
+                System.out.println(k + " = " + v);
+            }
+        });
         String combo = System.getProperty("browserAndVersion");
         String[] parts = combo.split("_");
         Configuration.browserSize = System.getProperty("browserSize");

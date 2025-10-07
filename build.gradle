@@ -124,5 +124,5 @@ tasks.register('Baikal2', Test) {
     useJUnitPlatform {
         includeTags("Baikal2")
     }
-    systemProperties System.getProperties()
+    systemProperties(System.getProperties())
 }
