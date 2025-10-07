@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
@@ -21,6 +22,7 @@ import static io.qameta.allure.Allure.step;
 @Tag("Baikal2")
 public class TestFillFormDemoQaJenkinsParametr {
     public static final String repository = "/automation-practice-form";
+    File file = new File("src/test/resources/less6_7/John_Shepard_29.jpg");
 
 
 
@@ -72,7 +74,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             $("#subjectsContainer").click();
             $("#subjectsContainer input").setValue("Computer Science").pressEnter();
             $("#hobbiesWrapper").$(byText("Reading")).click();
-            $("#uploadPicture").uploadFromClasspath("less6_7/John_Shepard_29.jpg");
+            $("#uploadPicture").uploadFile(file);
             $("#currentAddress").setValue("Uss Normandy");
             $("#lastName").setValue("Shepard");
             $("#userEmail").setValue("JohnS@normandy.com");
