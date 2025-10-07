@@ -77,7 +77,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             if (!Configuration.browser.equals("firefox")) {
                 $("#uploadPicture").uploadFromClasspath("less6_7/John_Shepard_29.jpg");
             } else {
-                System.out.println("⚠️ Пропускаем upload — Firefox конченный браузер");
+                io.qameta.allure.Allure.step("⚠️ Пропускаем upload — Firefox конченный браузер");
             }
             $("#currentAddress").setValue("Uss Normandy");
             $("#lastName").setValue("Shepard");
@@ -104,7 +104,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             if (!Configuration.browser.equals("firefox")) {
                 $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("John_Shepard_29.jpg"));
             } else {
-                System.out.println("Пропускаем upload — Firefox конченный браузер");
+                io.qameta.allure.Allure.step("Пропускаем Проверку картинки — еще раз: Firefox конченный браузер");
             }
 
             $(".table-responsive").$(byText("Address")).closest("tr").shouldHave(text("Uss Normandy"));
