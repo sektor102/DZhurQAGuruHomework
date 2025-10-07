@@ -1,6 +1,5 @@
 package guru.qa.dZhurHomeWork.less12_10_JenkinsParametr;
 
-import com.codeborne.selenide.Config;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import guru.qa.dZhurHomeWork.less12_10_JenkinsParametr.Attach.Attach;
@@ -20,7 +19,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
-public class TestFillFormDemoQaJenkinsAllure {
+public class TestFillFormDemoQaJenkinsParametr {
     public static final String repository = "/automation-practice-form";
 
     @BeforeAll
