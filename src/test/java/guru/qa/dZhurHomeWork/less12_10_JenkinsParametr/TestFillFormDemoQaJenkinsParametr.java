@@ -74,7 +74,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             $("#subjectsContainer").click();
             $("#subjectsContainer input").setValue("Computer Science").pressEnter();
             $("#hobbiesWrapper").$(byText("Reading")).click();
-            $("#uploadPicture").uploadFile(file);
+            $("#uploadPicture").sendKeys(file.getAbsolutePath());
             $("#currentAddress").setValue("Uss Normandy");
             $("#lastName").setValue("Shepard");
             $("#userEmail").setValue("JohnS@normandy.com");
