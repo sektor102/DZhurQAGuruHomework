@@ -73,7 +73,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             $("#dateOfBirthInput").sendKeys("11 Apr 2054" + Keys.ENTER);
             $("#subjectsContainer").click();
             $("#subjectsContainer input").setValue("Computer Science").pressEnter();
-            $("#hobbiesWrapper").$(byText("Reading")).click();
+            executeJavaScript("arguments[0].click();", $("#hobbiesWrapper").$(byText("Reading")));
             if (!Configuration.browser.equals("firefox")) {
                 $("#uploadPicture").uploadFromClasspath("less6_7/John_Shepard_29.jpg");
             } else {
