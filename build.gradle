@@ -119,3 +119,8 @@ tasks.register('Baikal', Test) {
         includeTags("Baikal")
     }
 }
+
+tasks.register('Baikal2', Test) {
+    useJUnitPlatform {
+        includeTags("Baikal2")
+    }

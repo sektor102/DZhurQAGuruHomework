@@ -30,8 +30,8 @@ public class TestFillFormDemoQaJenkinsAllure {
         Configuration.browserVersion = System.getProperty("browserVersion");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        String webDriverHost = System.getProperty("webDriverHost");
-        Configuration.remote = "https://user1:1234@"+webDriverHost+"/wd/hub";
+        String urlSelenide = System.getProperty("urlSelenide");
+        Configuration.remote = "https://user1:1234@"+urlSelenide+"/wd/hub";
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
@@ -50,7 +50,7 @@ public class TestFillFormDemoQaJenkinsAllure {
     }
 
     @Test
-    @Tag("Baikal")
+    @Tag("Baikal2")
     void fillFormTestJenkinsAllure() {
         step("Открываем страницу формы для заполнения " + repository, () -> {
             open(repository);
