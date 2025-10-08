@@ -61,18 +61,6 @@ public class TestFillFormDemoQaJenkinsParametr {
     @Test
     @DisplayName("DemoQA test")
     void TestFillForm() {
-        String uniqueId = UUID.randomUUID().toString();
-        String testName = String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize);
-
-        Allure.getLifecycle().updateTestCase(tc -> {
-            tc.setUuid(uniqueId);
-            tc.setName(testName);
-            tc.setFullName(testName);
-            tc.setHistoryId(browser + "_" + browserVersion + "_" + browserSize); // 👈 критично
-        });
-
-        Allure.label("Browser", browser + "_" + browserVersion);
-        Allure.label("Resolution", browserSize);
 
         step("Открываем страницу формы " + repository, () -> {
             open(repository);
@@ -80,6 +68,19 @@ public class TestFillFormDemoQaJenkinsParametr {
             executeJavaScript("$('#fixedban').remove()");
             executeJavaScript("$('footer').remove()");
         });
+
+        String uniqueId = UUID.randomUUID().toString();
+        String testName = String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize);
+
+        Allure.getLifecycle().updateTestCase(tc -> {
+            tc.setUuid(uniqueId);
+            tc.setName(testName);
+            tc.setFullName(testName);
+            tc.setHistoryId(browser + "_" + browserVersion + "_" + browserSize);
+        });
+
+        Allure.label("Browser", browser + "_" + browserVersion);
+        Allure.label("Resolution", browserSize);
 
         step("Заполняем форму DemoQA", () -> {
             $("#firstName").setValue("John");
