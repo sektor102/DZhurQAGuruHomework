@@ -62,14 +62,15 @@ public class TestFillFormDemoQaJenkinsParametr {
     @DisplayName("DemoQA test")
     void TestFillForm() {
         String uniqueId = UUID.randomUUID().toString();
-        Allure.getLifecycle().updateTestCase(tc -> {
-            tc.setUuid(uniqueId); // 👈 вот эта строка решает затирание
-            tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize));
-        });
-        Allure.getLifecycle().updateTestCase(tc ->
-                tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize))
+        String testName = String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize);
 
-        );
+        Allure.getLifecycle().updateTestCase(tc -> {
+            tc.setUuid(uniqueId);
+            tc.setName(testName);
+            tc.setFullName(testName);
+            tc.setHistoryId(browser + "_" + browserVersion + "_" + browserSize); // 👈 критично
+        });
+
         Allure.label("Browser", browser + "_" + browserVersion);
         Allure.label("Resolution", browserSize);
 
