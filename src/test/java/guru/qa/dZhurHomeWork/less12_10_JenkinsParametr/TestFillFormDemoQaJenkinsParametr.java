@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.util.Map;
+import java.util.UUID;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -60,6 +61,11 @@ public class TestFillFormDemoQaJenkinsParametr {
     @Test
     @DisplayName("DemoQA test")
     void TestFillForm() {
+        String uniqueId = UUID.randomUUID().toString();
+        Allure.getLifecycle().updateTestCase(tc -> {
+            tc.setUuid(uniqueId); // 👈 вот эта строка решает затирание
+            tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize));
+        });
         Allure.getLifecycle().updateTestCase(tc ->
                 tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize))
 
