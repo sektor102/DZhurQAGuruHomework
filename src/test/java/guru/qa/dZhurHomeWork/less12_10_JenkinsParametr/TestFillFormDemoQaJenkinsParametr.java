@@ -21,9 +21,6 @@ import static io.qameta.allure.Allure.step;
 @Tag("Baikal2")
 @DisplayName("Тест формы DemoQA с параметрами из дженкинса")
 public class TestFillFormDemoQaJenkinsParametr {
-    public static String browser;
-    public static String browserVersion;
-    public static String browserSize;
 
     public static final String repository = "/automation-practice-form";
     File file = new File("src/test/resources/less6_7/John_Shepard_29.jpg");
@@ -49,8 +46,9 @@ public class TestFillFormDemoQaJenkinsParametr {
         Configuration.browserCapabilities = capabilities;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
-        Allure.parameter("Browser", browser + "_" + browserVersion);
-        Allure.parameter("Resolution", browserSize);
+
+        Allure.parameter("Browser", Configuration.browser + " " + Configuration.browserVersion);
+        Allure.parameter("Resolution", Configuration.browserSize);
     }
 
     @AfterEach
@@ -62,7 +60,7 @@ public class TestFillFormDemoQaJenkinsParametr {
     }
 
     @Test
-    void TestFillFormDemoQaJenkinsParametr() {
+    void TestFillForm() {
         Allure.getLifecycle().updateTestCase(tc ->
                 tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize))
         );
