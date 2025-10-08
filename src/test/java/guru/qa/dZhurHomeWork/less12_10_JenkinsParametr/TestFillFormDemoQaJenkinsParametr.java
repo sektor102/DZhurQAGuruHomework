@@ -3,11 +3,9 @@ package guru.qa.dZhurHomeWork.less12_10_JenkinsParametr;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import guru.qa.dZhurHomeWork.less12_10_JenkinsParametr.Attach.Attach;
+import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -16,11 +14,17 @@ import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 @Tag("Baikal2")
+@DisplayName("Тест формы DemoQA с параметрами из дженкинса")
 public class TestFillFormDemoQaJenkinsParametr {
+    public static String browser;
+    public static String browserVersion;
+    public static String browserSize;
+
     public static final String repository = "/automation-practice-form";
     File file = new File("src/test/resources/less6_7/John_Shepard_29.jpg");
 
@@ -30,9 +34,9 @@ public class TestFillFormDemoQaJenkinsParametr {
     static void beforeAll() {
         String combo = System.getProperty("browserAndVersion");
         String[] parts = combo.split("_");
-        Configuration.browserSize = System.getProperty("browserSize");
-        Configuration.browser = parts[0];
-        Configuration.browserVersion = parts[1];
+        browserSize = System.getProperty("browserSize");
+        browser = parts[0];
+        browserVersion = parts[1];
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         String urlSelenide = System.getProperty("urlSelenide");
@@ -44,6 +48,9 @@ public class TestFillFormDemoQaJenkinsParametr {
         ));
         Configuration.browserCapabilities = capabilities;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+        Allure.parameter("Browser", browser + "_" + browserVersion);
+        Allure.parameter("Resolution", browserSize);
     }
 
     @AfterEach
@@ -56,7 +63,11 @@ public class TestFillFormDemoQaJenkinsParametr {
 
     @Test
     void TestFillFormDemoQaJenkinsParametr() {
-        step("Открываем страницу формы для заполнения " + repository, () -> {
+        Allure.getLifecycle().updateTestCase(tc ->
+                tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize))
+        );
+
+        step("Открываем страницу формы " + repository, () -> {
             open(repository);
             $("body").shouldBe(visible);
             executeJavaScript("$('#fixedban').remove()");
@@ -74,7 +85,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             $("#subjectsContainer").click();
             $("#subjectsContainer input").setValue("Computer Science").pressEnter();
             executeJavaScript("arguments[0].click();", $("#hobbiesWrapper").$(byText("Reading")));
-            if (!Configuration.browser.equals("firefox")) {
+            if (!browser.equals("firefox")) {
                 $("#uploadPicture").uploadFromClasspath("less6_7/John_Shepard_29.jpg");
             } else {
                 io.qameta.allure.Allure.step("⚠️ Пропускаем upload — Firefox конченный браузер");
@@ -101,7 +112,7 @@ public class TestFillFormDemoQaJenkinsParametr {
             $(".table-responsive").$(byText("Date of Birth")).closest("tr").shouldHave(text("11 April,2054"));
             $(".table-responsive").$(byText("Subjects")).closest("tr").shouldHave(text("Computer Science"));
             $(".table-responsive").$(byText("Hobbies")).closest("tr").shouldHave(text("Reading"));
-            if (!Configuration.browser.equals("firefox")) {
+            if (!browser.equals("firefox")) {
                 $(".table-responsive").$(byText("Picture")).closest("tr").shouldHave(text("John_Shepard_29.jpg"));
             } else {
                 io.qameta.allure.Allure.step("Пропускаем Проверку картинки — еще раз: Firefox конченный браузер");
