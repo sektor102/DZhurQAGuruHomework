@@ -19,12 +19,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 @Tag("Baikal2")
-@DisplayName("Тест формы DemoQA с параметрами из дженкинса")
+@DisplayName("Тест формы DemoQA")
 public class TestFillFormDemoQaJenkinsParametr {
 
     public static final String repository = "/automation-practice-form";
     File file = new File("src/test/resources/less6_7/John_Shepard_29.jpg");
-
 
 
     @BeforeAll
@@ -58,12 +57,15 @@ public class TestFillFormDemoQaJenkinsParametr {
         Attach.browserConsoleLogs();
         Attach.addVideo();
     }
-
     @Test
+    @DisplayName("DemoQA test")
     void TestFillForm() {
         Allure.getLifecycle().updateTestCase(tc ->
                 tc.setName(String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize))
+
         );
+        Allure.label("Browser", browser + "_" + browserVersion);
+        Allure.label("Resolution", browserSize);
 
         step("Открываем страницу формы " + repository, () -> {
             open(repository);
