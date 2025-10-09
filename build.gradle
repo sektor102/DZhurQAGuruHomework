@@ -133,7 +133,8 @@ tasks.withType(Test).configureEach {
         if (tags) {
             includeTags tags.split(',')
         }
-        systemProperties(System.getProperties())
     }
+    systemProperties(System.getProperties())
 }
+
 
