@@ -2,6 +2,7 @@ package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps;
 
 import guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.TestBaseLess12HHAllure;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -12,8 +13,10 @@ import static guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.AllureHelperL
 import static io.qameta.allure.Allure.step;
 
 public class TestCheckNameVacancy extends TestBaseLess12HHAllure {
-    @Test
+    @Tag("hh")
+    @Tag("ui")
     @DisplayName("Проверяем что есть кнопка откликнуться")
+    @Test
     void TestNameVacancy() {
 
         step("Открываем вакансию", () -> {

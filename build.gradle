@@ -126,3 +126,13 @@ tasks.register('Baikal2', Test) {
     }
     systemProperties(System.getProperties())
 }
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform {
+        def tags = System.getProperty("tags")
+        if (tags) {
+            includeTags tags.split(',')
+        }
+    }
+}
+
