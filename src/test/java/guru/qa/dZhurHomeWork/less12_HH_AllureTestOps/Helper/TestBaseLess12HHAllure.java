@@ -47,7 +47,7 @@ public class TestBaseLess12HHAllure {
         guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.browserConsoleLogs();
         guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.addVideo();
     }
-    public static final String urlWorkHH = "/123603592?query=Qa+engineer&hhtmFrom=vacancy_search_list";
+    public static final String urlWorkHH = "/vacancy/123603592";
 
 
 }
