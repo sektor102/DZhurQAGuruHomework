@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-@DisplayName("Проверяем что есть кнопка откликнуться")
+@DisplayName("Проверяем имя вакансии")
 public class TestCheckNameVacancy extends TestBaseLess12HHAllure {
     @Tag("hh")
     @Tag("ui")

@@ -2,23 +2,23 @@ package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
-
+import org.junit.jupiter.api.extension.RegisterExtension;
 import static com.codeborne.selenide.Configuration.*;
 
 public class TestBaseLess12HHAllure {
     public static final String urlWorkHH = "/vacancy/123603592";
+
+    @RegisterExtension
+    static AllureDisplayNameExtension allureNameExt = new AllureDisplayNameExtension();
 
     private static void writeEnv() {
         try {
@@ -35,14 +35,6 @@ public class TestBaseLess12HHAllure {
             }
         } catch (Exception ignored) {}
     }
-
-    @BeforeEach
-    void setTestMeta(TestInfo testInfo) {
-        AllureHelperLess12.setDisplayName(testInfo);
-        Allure.parameter("Browser", Configuration.browser + " " + Configuration.browserVersion);
-        Allure.parameter("Resolution", Configuration.browserSize);
-    }
-
 
     @BeforeAll
     static void beforeAll() {
