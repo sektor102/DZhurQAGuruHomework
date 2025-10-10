@@ -16,8 +16,7 @@ public class TestCheckDescriptionVacancy extends TestBaseLess12HHAllure {
     @Tag("ui")
     @DisplayName("Проверяем описание вакансии")
     @Test
-    void TestNameVacancy() {
-
+    void TestDescriptionVacancy() {
         step("Открываем вакансию", () -> {
             open(urlWorkHH);
             updateTestMeta();
@@ -26,9 +25,9 @@ public class TestCheckDescriptionVacancy extends TestBaseLess12HHAllure {
         step("Проверяем описание вакансии", () -> {
             $("[data-qa='vacancy-description']")
                     .shouldHave(text("Sputnik8 —"))
-                    .shouldHave(text("крупнейший сервис бронирования экскурсий по миру на русском языке"))
+                    .shouldHave(text("крупнейший сервис бронирования экскурсий по всему миру на русском языке"))
                     .shouldHave(text("Мы аккредитованная IT-компания и быстро растем — каждый год"))
-                    .shouldHave(text("В нашей команде почти 200 талантов. "));
+                    .shouldHave(text("В нашей команде почти 200 талантов"));
 
         });
 

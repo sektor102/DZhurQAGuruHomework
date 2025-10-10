@@ -16,7 +16,7 @@ public class TestCityVacancy extends TestBaseLess12HHAllure {
     @Tag("ui")
     @DisplayName("Проверяем город вакансии")
     @Test
-    void TestNameVacancy() {
+    void TestCityCheckVacancy() {
 
         step("Открываем вакансию", () -> {
             open(urlWorkHH);
@@ -24,9 +24,8 @@ public class TestCityVacancy extends TestBaseLess12HHAllure {
         });
 
         step("Проверяем город вакансии", () -> {
-            open(urlWorkHH);
             $("[data-qa='vacancy-view-raw-address']")
-                    .shouldHave(text("Санкт-Петербург)"));
+                    .shouldHave(text("Санкт-Петербург"));
         });
 
     }
