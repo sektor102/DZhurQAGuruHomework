@@ -1,19 +1,25 @@
 package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper;
+import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Allure;
 import org.junit.jupiter.api.TestInfo;
 
-
-
-import static com.codeborne.selenide.Configuration.browser;
-import static com.codeborne.selenide.Configuration.browserVersion;
-import static com.codeborne.selenide.Configuration.browserSize;
-
 public class AllureHelperLess12 {
+
     public static void setDisplayName(TestInfo testInfo) {
-        String browserInfo = String.format("[%s_%s_%s]", browser, browserVersion, browserSize);
+        String browserInfo = String.format("[%s_%s_%s]",
+                Configuration.browser, Configuration.browserVersion, Configuration.browserSize);
+
         String name = testInfo.getDisplayName() + " " + browserInfo;
 
-        Allure.getLifecycle().updateTestCase(tc -> tc.setName(name));
+        String historyId = testInfo.getTestMethod()
+                .map(m -> m.getDeclaringClass().getName() + "." + m.getName() + browserInfo)
+                .orElse(name);
+
+        Allure.getLifecycle().updateTestCase(tc -> {
+            tc.setName(name);
+            tc.setFullName(name);
+            tc.setHistoryId(historyId);
+        });
     }
 
 }
