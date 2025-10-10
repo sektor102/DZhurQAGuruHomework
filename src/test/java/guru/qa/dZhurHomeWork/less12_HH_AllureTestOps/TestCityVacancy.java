@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.AllureHelperLess12.updateTestMeta;
 import static io.qameta.allure.Allure.step;
 
 public class TestCityVacancy extends TestBaseLess12HHAllure {
@@ -18,10 +17,7 @@ public class TestCityVacancy extends TestBaseLess12HHAllure {
     @Test
     void TestCityCheckVacancy() {
 
-        step("Открываем вакансию", () -> {
-            open(urlWorkHH);
-            updateTestMeta();
-        });
+        step("Открываем вакансию", () -> open(urlWorkHH));
 
         step("Проверяем город вакансии", () -> {
             $("[data-qa='vacancy-view-raw-address']")

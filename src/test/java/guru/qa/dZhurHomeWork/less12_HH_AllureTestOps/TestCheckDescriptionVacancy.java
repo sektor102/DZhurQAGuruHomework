@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.AllureHelperLess12.updateTestMeta;
 import static io.qameta.allure.Allure.step;
 
 public class TestCheckDescriptionVacancy extends TestBaseLess12HHAllure {
@@ -17,10 +16,8 @@ public class TestCheckDescriptionVacancy extends TestBaseLess12HHAllure {
     @DisplayName("Проверяем описание вакансии")
     @Test
     void TestDescriptionVacancy() {
-        step("Открываем вакансию", () -> {
-            open(urlWorkHH);
-            updateTestMeta();
-        });
+
+        step("Открываем вакансию", () -> open(urlWorkHH));
 
         step("Проверяем описание вакансии", () -> {
             $("[data-qa='vacancy-description']")

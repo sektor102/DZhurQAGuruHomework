@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.AllureHelperLess12.updateTestMeta;
 import static io.qameta.allure.Allure.step;
 
 public class TestCheckParametersVacancy extends TestBaseLess12HHAllure {
@@ -20,10 +19,7 @@ public class TestCheckParametersVacancy extends TestBaseLess12HHAllure {
     @Test
     void TestParametersVacancy() {
 
-        step("Открываем вакансию", () -> {
-            open(urlWorkHH);
-            updateTestMeta();
-        });
+        step("Открываем вакансию", () -> open(urlWorkHH));
 
         step("Проверяем зарплату в вакансии", () -> {
             $(byText("Уровень дохода не указан"))

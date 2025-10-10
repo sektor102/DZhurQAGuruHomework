@@ -9,10 +9,11 @@ import static com.codeborne.selenide.Configuration.browserSize;
 
 public class AllureHelperLess12 {
 
-    public static void updateTestMeta() {
+    public static void updateTestMeta(String testDisplayName) {
         try {
             String uniqueId = UUID.randomUUID().toString();
-            String testName = String.format("DemoQA [%s_%s %s]", browser, browserVersion, browserSize);
+            String testName = String.format("%s [%s_%s %s]",
+                    testDisplayName, browser, browserVersion, browserSize);
 
             Allure.getLifecycle().updateTestCase(tc -> {
                 tc.setUuid(uniqueId);

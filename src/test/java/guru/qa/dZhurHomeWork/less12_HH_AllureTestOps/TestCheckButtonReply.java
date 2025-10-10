@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
-import static guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.AllureHelperLess12.updateTestMeta;
 import static io.qameta.allure.Allure.step;
 
 public class TestCheckButtonReply extends TestBaseLess12HHAllure {
@@ -18,10 +17,7 @@ public class TestCheckButtonReply extends TestBaseLess12HHAllure {
     @Test
     void TestButtonReply() {
 
-        step("Открываем вакансию", () -> {
-            open(urlWorkHH);
-            updateTestMeta();
-        });
+        step("Открываем вакансию", () -> open(urlWorkHH));
 
         step("Проверяем наличие кнопки откликнуться", () -> {
             $("[data-qa='vacancy-response-link-top']").should(appear);

@@ -6,6 +6,11 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
+import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
@@ -13,6 +18,12 @@ import java.util.Map;
 import static com.codeborne.selenide.Configuration.*;
 
 public class TestBaseLess12HHAllure {
+    public static final String urlWorkHH = "/vacancy/123603592";
+
+    @BeforeEach
+    void setTestMeta(TestInfo testInfo) {
+        AllureHelperLess12.updateTestMeta(testInfo.getDisplayName());
+    }
 
     @BeforeAll
     static void beforeAll() {
@@ -38,7 +49,67 @@ public class TestBaseLess12HHAllure {
 
         Allure.parameter("Browser", Configuration.browser + " " + Configuration.browserVersion);
         Allure.parameter("Resolution", Configuration.browserSize);
+
+        String desktopUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                + "AppleWebKit/537.36 (KHTML, like Gecko) "
+                + "Chrome/128.0.6613.137 Safari/537.36";
+
+        switch (Configuration.browser) {
+            case "chrome" -> {
+                ChromeOptions options = new ChromeOptions();
+
+
+                options.addArguments("--disable-blink-features=AutomationControlled");
+                options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                options.setExperimentalOption("useAutomationExtension", false);
+
+
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-gpu");
+
+
+                options.addArguments("--user-agent=" + desktopUserAgent);
+
+
+                if (Configuration.headless) {
+                    options.addArguments("--headless=new");
+                    options.addArguments("--window-size=" + Configuration.browserSize.replace("x", ","));
+                }
+
+                MutableCapabilities caps = new MutableCapabilities();
+                caps.merge(options);
+                Configuration.browserCapabilities = caps;
+            }
+
+            case "firefox" -> {
+                MutableCapabilities caps = getMutableCapabilities(desktopUserAgent);
+                Configuration.browserCapabilities = caps;
+
+
+            }
+        }
     }
+
+    private static MutableCapabilities getMutableCapabilities(String desktopUserAgent) {
+        FirefoxOptions options = new FirefoxOptions();
+
+
+        options.addPreference("general.useragent.override", desktopUserAgent);
+        options.addPreference("dom.webdriver.enabled", false);
+        options.addPreference("useAutomationExtension", false);
+
+        if (Configuration.headless) {
+            options.addArguments("-headless");
+            options.addArguments("--width=" + Configuration.browserSize.split("x")[0]);
+            options.addArguments("--height=" + Configuration.browserSize.split("x")[1]);
+        }
+
+        MutableCapabilities caps = new MutableCapabilities();
+        caps.merge(options);
+        return caps;
+    }
+
 
     @AfterEach
     void addAttachments() {
@@ -47,7 +118,8 @@ public class TestBaseLess12HHAllure {
         guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.browserConsoleLogs();
         guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.addVideo();
     }
-    public static final String urlWorkHH = "/vacancy/123603592";
-
-
 }
+
+
+
+
