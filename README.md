@@ -1,48 +1,90 @@
-# UI-тесты hh.ru (5 шт.)
+#  UI-тесты hh.ru (5 шт.)
 
-## Запуск локально
+##  Локальный запуск
+
+```bash
 ./gradlew clean test -Dtags=hh
-# По умолчанию: chrome_128, 1920x1080. Без urlSelenide запускается локально.
+```
 
-# Опционально через удалённый Selenoid:
-# ./gradlew clean test \
-#   -Dtags=hh \
-#   -DurlSelenide=selenoid.autotests.cloud \
-#   -DremoteLogin=<login> -DremotePassword=<pass> \
-#   -DbrowserAndVersion=chrome_128 \
-#   -DbrowserSize=1920x1080
+По умолчанию используется **Chrome 128**, разрешение **1920x1080**, без **Selenoid**.
 
-## Запуск в Jenkins (матрица браузеров)
-# Один clean, прогон по матрице, результаты не затираются — пишем в отдельные папки и склеиваем.
+---
+
+###  Запуск через Selenoid
+
+```bash
+./gradlew clean test -Dtags=hh \
+  -DurlSelenide=selenoid.autotests.cloud \
+  -DremoteLogin="$REMOTE_LOGIN" \
+  -DremotePassword="$REMOTE_PASSWORD" \
+  -DbrowserAndVersion=chrome_128 \
+  -DbrowserSize=1920x1080
+```
+
+---
+
+##  Jenkins (матрица браузеров)
+
+```bash
 #!/bin/bash
 set -euo pipefail
+
 rm -rf build/allure-results build/allure-results-iters allure-report || true
 mkdir -p build/allure-results build/allure-results-iters
-chmod +x gradlew
 
+chmod +x gradlew
 ./gradlew clean
-urlSelenide="selenoid.autotests.cloud"
 
 for BROWSER in chrome_128 firefox_125; do
   for SIZE in 1920x1080; do
     ITER_DIR="build/allure-results-iters/${BROWSER}_${SIZE}"
-    ./gradlew test --continue \
-      -Dtags=hh \
+    echo "Run: $BROWSER $SIZE"
+
+    ./gradlew test --continue -Dtags=hh \
       -DbrowserAndVersion="$BROWSER" \
       -DbrowserSize="$SIZE" \
-      -DurlSelenide="$urlSelenide" \
+      -DurlSelenide="selenoid.autotests.cloud" \
       -DremoteLogin="$REMOTE_LOGIN" \
       -DremotePassword="$REMOTE_PASSWORD" \
       -Dallure.results.directory="$ITER_DIR"
+
+    mkdir -p build/allure-results
     cp -r "$ITER_DIR"/* build/allure-results/ || true
   done
 done
 
-## Allure
-# Отчёт собирается плагином Jenkins из build/allure-results в build/reports/allure-report
+echo "Done"
+```
 
-## Технологии
-Java 17, Gradle 8; JUnit 5, Selenide; Selenoid; Allure; Jenkins.
+---
 
-## Примечание
-hh.ru может отдавать капчу — прогоны иногда падают. Интеграции (Selenoid, Jenkins, Allure) настроены; результаты разных браузеров не затираются (уникальный historyId, склейка директорий).
+##  Allure Report
+
+Отчёт подхватывается из `build/allure-results` (**плагин Jenkins**)  
+и открывается как `build/reports/allure-report`.
+
+---
+
+##  Технологии
+
+| Технология | Версия |
+|-------------|--------|
+| ☕ Java | 17     |
+| 🧱 Gradle | 8      |
+| 🧪 JUnit | 5      |
+| 🌿 Selenide | 7      |
+| 📊 Allure | 2      |
+| ☁️ Selenoid | ?      |
+| ⚙️ Jenkins | ?      |
+
+---
+
+##  Примечание
+
+Сайт **hh.ru** периодически отдаёт капчу — возможны падения на CI.  
+Результаты разных браузеров **не затираются**  
+(уникальные `historyId` и `environment.properties`).
+
+---
+
+ *Проект создан в учебных целях. Автоматизация выполнена в рамках курса по UI-тестированию с использованием Java, Gradle и Selenide.*
