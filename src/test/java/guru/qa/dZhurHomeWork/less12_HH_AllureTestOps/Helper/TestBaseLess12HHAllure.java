@@ -20,9 +20,27 @@ import static com.codeborne.selenide.Configuration.*;
 public class TestBaseLess12HHAllure {
     public static final String urlWorkHH = "/vacancy/123603592";
 
+    private static void writeEnv() {
+        try {
+            java.io.File dir = new java.io.File("build/allure-results");
+            if (!dir.exists()) dir.mkdirs();
+
+            var p = new java.util.Properties();
+            p.setProperty("browser", Configuration.browser + "_" + Configuration.browserVersion);
+            p.setProperty("size", Configuration.browserSize);
+            p.setProperty("baseUrl", Configuration.baseUrl); // опционально
+
+            try (var fos = new java.io.FileOutputStream(new java.io.File(dir, "environment.properties"))) {
+                p.store(fos, "env");
+            }
+        } catch (Exception ignored) {}
+    }
+
     @BeforeEach
     void setTestMeta(TestInfo testInfo) {
         AllureHelperLess12.setDisplayName(testInfo);
+        Allure.parameter("Browser", Configuration.browser + " " + Configuration.browserVersion);
+        Allure.parameter("Resolution", Configuration.browserSize);
     }
 
 
@@ -46,10 +64,6 @@ public class TestBaseLess12HHAllure {
         ));
         Configuration.browserCapabilities = capabilities;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-
-
-        Allure.parameter("Browser", Configuration.browser + " " + Configuration.browserVersion);
-        Allure.parameter("Resolution", Configuration.browserSize);
 
         String desktopUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                 + "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -90,6 +104,8 @@ public class TestBaseLess12HHAllure {
 
             }
         }
+        writeEnv();
+
     }
 
     private static MutableCapabilities getMutableCapabilities(String desktopUserAgent) {

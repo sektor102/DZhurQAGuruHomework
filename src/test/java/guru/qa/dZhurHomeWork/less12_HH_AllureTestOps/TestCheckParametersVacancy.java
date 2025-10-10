@@ -12,10 +12,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
+@DisplayName("Проверяем параметры вакансии")
 public class TestCheckParametersVacancy extends TestBaseLess12HHAllure {
     @Tag("hh")
     @Tag("ui")
-    @DisplayName("Проверяем параметры вакансии")
     @Test
     void TestParametersVacancy() {
 

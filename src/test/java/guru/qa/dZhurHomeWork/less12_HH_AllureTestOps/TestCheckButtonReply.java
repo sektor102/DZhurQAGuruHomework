@@ -10,10 +10,10 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static io.qameta.allure.Allure.step;
 
+@DisplayName("Проверяем что есть кнопка откликнуться")
 public class TestCheckButtonReply extends TestBaseLess12HHAllure {
     @Tag("hh")
     @Tag("ui")
-    @DisplayName("Проверяем что есть кнопка откликнуться")
     @Test
     void TestButtonReply() {
 
