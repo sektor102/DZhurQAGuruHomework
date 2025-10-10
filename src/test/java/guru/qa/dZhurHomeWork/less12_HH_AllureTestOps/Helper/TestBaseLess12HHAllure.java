@@ -22,8 +22,9 @@ public class TestBaseLess12HHAllure {
 
     @BeforeEach
     void setTestMeta(TestInfo testInfo) {
-        AllureHelperLess12.updateTestMeta(testInfo.getDisplayName());
+        AllureHelperLess12.setDisplayName(testInfo);
     }
+
 
     @BeforeAll
     static void beforeAll() {
