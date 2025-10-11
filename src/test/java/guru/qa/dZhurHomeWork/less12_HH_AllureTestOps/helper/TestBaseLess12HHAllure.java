@@ -48,7 +48,8 @@ public class TestBaseLess12HHAllure {
         browser = parts[0];
         browserVersion = parts[1];
         Configuration.baseUrl = "https://sbp.hh.ru";
-        Configuration.pageLoadStrategy = "eager";
+        Configuration.pageLoadStrategy = "normal";
+        Configuration.timeout = 15000;
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", login, password, urlSelenide);
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
