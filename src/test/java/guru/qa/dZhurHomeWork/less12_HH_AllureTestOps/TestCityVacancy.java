@@ -1,6 +1,6 @@
 package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps;
 
-import guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper.TestBaseLess12HHAllure;
+import guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.helper.TestBaseLess12HHAllure;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class TestCityVacancy extends TestBaseLess12HHAllure {
     @Tag("hh")
     @Tag("ui")
     @Test
-    void TestCityCheckVacancy() {
+    void testCityCheckVacancy() {
 
         step("Открываем вакансию", () -> open(urlWorkHH));
 

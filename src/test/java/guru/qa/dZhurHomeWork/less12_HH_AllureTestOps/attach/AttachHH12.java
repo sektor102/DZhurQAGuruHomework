@@ -1,4 +1,4 @@
-package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach;
+package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.attach;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;

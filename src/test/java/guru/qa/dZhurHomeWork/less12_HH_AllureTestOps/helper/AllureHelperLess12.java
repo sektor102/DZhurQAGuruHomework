@@ -1,4 +1,4 @@
-package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper;
+package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.helper;
 import com.codeborne.selenide.Configuration;
 import io.qameta.allure.Allure;
 import org.junit.jupiter.api.TestInfo;

@@ -1,7 +1,8 @@
-package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Helper;
+package guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.helper;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.attach.AttachHH12;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -122,10 +123,10 @@ public class TestBaseLess12HHAllure {
 
     @AfterEach
     void addAttachments() {
-        guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.screenshotAs("Last screenshot");
-        guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.pageSource();
-        guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.browserConsoleLogs();
-        guru.qa.dZhurHomeWork.less12_HH_AllureTestOps.Attach.AttachHH12.addVideo();
+        AttachHH12.screenshotAs("Last screenshot");
+        AttachHH12.pageSource();
+        AttachHH12.browserConsoleLogs();
+        AttachHH12.addVideo();
     }
 }
 
