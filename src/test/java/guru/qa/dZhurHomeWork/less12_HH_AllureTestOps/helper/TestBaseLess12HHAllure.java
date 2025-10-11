@@ -47,7 +47,7 @@ public class TestBaseLess12HHAllure {
         browserSize = System.getProperty("browserSize");
         browser = parts[0];
         browserVersion = parts[1];
-        Configuration.baseUrl = "https://hh.ru";
+        Configuration.baseUrl = "https://sbp.hh.ru";
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub", login, password, urlSelenide);
         DesiredCapabilities capabilities = new DesiredCapabilities();
