@@ -71,7 +71,8 @@ dependencies {
             'io.qameta.allure:allure-junit5',
             'io.qameta.allure:allure-selenide:2.29.1',
             platform("org.junit:junit-bom:5.11.3"),
-            'org.junit.jupiter:junit-jupiter-api'
+            'org.junit.jupiter:junit-jupiter-api',
+            'io.rest-assured:rest-assured:5.5.6',
     )
 
     testRuntimeOnly (
@@ -137,4 +138,18 @@ tasks.withType(Test).configureEach {
     systemProperties(System.getProperties())
 }
 
+tasks.withType(Test).configureEach {
+    useJUnitPlatform {
+        def tags = System.getProperty("tags")
+        if (tags) {
+            includeTags tags.split(',')
+        }
+    }
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
 
