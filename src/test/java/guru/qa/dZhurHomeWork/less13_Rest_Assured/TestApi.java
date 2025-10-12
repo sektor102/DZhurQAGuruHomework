@@ -1,6 +1,5 @@
 package guru.qa.dZhurHomeWork.less13_Rest_Assured;
 
-import static io.restassured.RestAssured.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.*;
