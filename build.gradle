@@ -88,14 +88,21 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
 
-
 test {
     useJUnitPlatform {
-        includeTags(System.getProperty("tags"))
+        def tags = System.getProperty("tags")
+        if (tags != null && !tags.isBlank()) {
+            includeTags(tags)
+        }
+
+        def testClass = System.getProperty("testClass")
+        if (testClass != null && !testClass.isBlank()) {
+            includePackagesOrClasses(testClass)
+        }
     }
+
     ignoreFailures = true
     jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
-
 
     testLogging {
         lifecycle {
@@ -116,17 +123,4 @@ tasks.register("allureReportTs") {
         }
         println("Saved: ${layout.buildDirectory.get()}/reports/allure-report-${ts}")
     }
-}
-
-tasks.register('Baikal', Test) {
-    useJUnitPlatform {
-        includeTags("Baikal")
-    }
-}
-
-tasks.register('Baikal2', Test) {
-    useJUnitPlatform {
-        includeTags("Baikal2")
-    }
-    systemProperties(System.getProperties())
 }
