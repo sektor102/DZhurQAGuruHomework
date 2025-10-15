@@ -90,9 +90,12 @@ dependencies {
 
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeTags(System.getProperty("tags"))
+    }
     ignoreFailures = true
     jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+
 
     testLogging {
         lifecycle {
