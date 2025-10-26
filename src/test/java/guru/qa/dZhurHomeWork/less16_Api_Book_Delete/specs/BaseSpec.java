@@ -7,7 +7,7 @@ import io.restassured.specification.RequestSpecification;
 
 import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.helpers.Allure.withAllure;
 
-public class ApiSpec {
+public class BaseSpec {
 
     public static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setContentType(ContentType.JSON)

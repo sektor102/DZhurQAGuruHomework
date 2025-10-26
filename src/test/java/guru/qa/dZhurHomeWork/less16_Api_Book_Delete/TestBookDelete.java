@@ -5,7 +5,7 @@ import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.LombokIsbnUserId;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.ApiSpec.requestSpec;
+import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.BaseSpec.requestSpec;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
