@@ -1,11 +1,12 @@
 package guru.qa.dZhurHomeWork.less14_Rest_Api_Spec;
 
-import guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.module.lombok.AddUserLombok;
+import guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.models.AddUserModel;
+import guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.specs.BaseSpecs;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.step;
-import static guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.specs.ApiSpec.loginRequestSpec;
+import static guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.specs.BaseSpecs.loginRequestSpec;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
@@ -30,34 +31,36 @@ public class TestApiModuleJenkins {
     private Integer id;
     private String message;
 
-    private AddUserLombok createTestUser() {
-        AddUserLombok user = new AddUserLombok();
+    private AddUserModel createTestUser() {
+        AddUserModel user = new AddUserModel();
         user.setName(faker.name().firstName());
         user.setGender("M");
         user.setEmail(faker.internet().emailAddress());
 
-        int id = given(loginRequestSpec)
+        AddUserModel response = given(loginRequestSpec)
                 .body(user)
                 .when()
                 .post()
                 .then()
-                .statusCode(201)
-                .extract().path("id");
+                .spec(BaseSpecs.createTestUser)
+                .extract().as(AddUserModel.class);
 
-        user.setId(id);
+        response.setName(user.getName());
+        response.setGender(user.getGender());
+        response.setEmail(user.getEmail());
 
-        return user;
+        return response;
     }
 
 
     @Test
     void postCreateUser() {
-        AddUserLombok user = new AddUserLombok();
+        AddUserModel user = new AddUserModel();
         user.setName(faker.name().firstName());
         user.setGender("M");
         user.setEmail(faker.internet().emailAddress());
 
-        AddUserLombok response = step("Создаём пользователя", () ->
+        AddUserModel response = step("Создаём пользователя", () ->
                 given(loginRequestSpec)
                         .log().all()
                         .contentType(JSON)
@@ -67,8 +70,8 @@ public class TestApiModuleJenkins {
                         .then()
                         .log().status()
                         .log().body()
-                        .statusCode(201)
-                        .extract().as(AddUserLombok.class)
+                        .spec(BaseSpecs.postCreateUser)
+                        .extract().as(AddUserModel.class)
         );
 
         step("Проверяем, что id вернулся и сообщение корректное", () -> {
@@ -79,13 +82,13 @@ public class TestApiModuleJenkins {
 
     @Test
     void getCheckUser() {
-        AddUserLombok created = createTestUser();
+        AddUserModel created = createTestUser();
 
         given(loginRequestSpec)
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .statusCode(200)
+                .spec(BaseSpecs.getCheckUser)
                 .body("id", equalTo(created.getId()))
                 .body("name", equalTo(created.getName()));
     }
@@ -93,9 +96,9 @@ public class TestApiModuleJenkins {
 
     @Test
     void putUser() {
-        AddUserLombok created = createTestUser();
+        AddUserModel created = createTestUser();
 
-        AddUserLombok updatedUser = new AddUserLombok();
+        AddUserModel updatedUser = new AddUserModel();
         updatedUser.setName(faker.name().firstName());
         updatedUser.setGender("F");
         updatedUser.setEmail(faker.internet().emailAddress());
@@ -107,7 +110,7 @@ public class TestApiModuleJenkins {
                 .then()
                 .log().status()
                 .log().body()
-                .statusCode(200)
+                .spec(BaseSpecs.putUser)
                 .body("id", equalTo(created.getId()))
                 .body("message", equalTo("User fully updated"));
 
@@ -115,7 +118,7 @@ public class TestApiModuleJenkins {
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .statusCode(200)
+                .spec(BaseSpecs.putUser2)
                 .body("name", equalTo(updatedUser.getName()))
                 .body("email", equalTo(updatedUser.getEmail()))
                 .body("gender", equalTo(updatedUser.getGender()));
@@ -123,9 +126,9 @@ public class TestApiModuleJenkins {
 
     @Test
     void patchUser() {
-        AddUserLombok created = createTestUser();
+        AddUserModel created = createTestUser();
 
-        AddUserLombok updatedUser = new AddUserLombok();
+        AddUserModel updatedUser = new AddUserModel();
         updatedUser.setName(faker.name().firstName());
 
         given(loginRequestSpec)
@@ -135,7 +138,7 @@ public class TestApiModuleJenkins {
                 .then()
                 .log().status()
                 .log().body()
-                .statusCode(200)
+                .spec(BaseSpecs.patchUser)
                 .body("id", equalTo(created.getId()))
                 .body("message", equalTo("User partially updated"));
 
@@ -143,26 +146,26 @@ public class TestApiModuleJenkins {
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .statusCode(200)
+                .spec(BaseSpecs.patchUser2)
                 .body("name", equalTo(updatedUser.getName()));
     }
 
     @Test
     void deleteUser() {
-        AddUserLombok created = createTestUser();
+        AddUserModel created = createTestUser();
 
         given(loginRequestSpec)
                 .when()
                 .delete("/{id}", created.getId())
                 .then()
                 .log().status()
-                .statusCode(204);
+                .spec(BaseSpecs.deleteUser);
 
         given(loginRequestSpec)
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .statusCode(404);
+                .spec(BaseSpecs.deleteUser2);
     }
 
 }
