@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 
 
-@Tag("ApiJenkins")
+@Tag("ApiJenkinsBook")
 public class TestBookDelete extends TestBase {
 
 
