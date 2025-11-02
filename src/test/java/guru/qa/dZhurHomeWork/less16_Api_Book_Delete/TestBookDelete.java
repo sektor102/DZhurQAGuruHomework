@@ -1,11 +1,13 @@
 package guru.qa.dZhurHomeWork.less16_Api_Book_Delete;
 
-import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.helpers.TestBase;
-import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.LombokIsbnUserId;
+
+import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.IsbnUserId;
+import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.BaseSpec;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.BaseSpec.requestSpec;
+
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -18,8 +20,11 @@ public class TestBookDelete extends TestBase {
 
     @Test
     void deleteBookInProfiler() {
+        loginDemoQa();
+        takeIdBook();
+        addBookInAccount();
 
-        LombokIsbnUserId deleteBook = new LombokIsbnUserId();
+        IsbnUserId deleteBook = new IsbnUserId();
         deleteBook.setIsbn(isbn);
         deleteBook.setUserId(userId);
 
@@ -34,7 +39,7 @@ public class TestBookDelete extends TestBase {
 
                 .then()
                 .log().status()
-                .statusCode(204);
+                .spec(BaseSpec.logAndStatusSpecs16(204));
         });
         step("Проверяем, что книга удалена", () ->
         System.out.println("Книга " + isbn + " удалена для пользователя " + userId)

@@ -1,9 +1,9 @@
-package guru.qa.dZhurHomeWork.less16_Api_Book_Delete.helpers;
+package guru.qa.dZhurHomeWork.less16_Api_Book_Delete;
 
+import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.BaseSpec;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.specs.BaseSpec.requestSpec;
 import static io.restassured.RestAssured.given;
@@ -20,10 +20,8 @@ public class TestBase {
         RestAssured.baseURI = "https://demoqa.com";
     }
 
-    @BeforeEach
-        void loginDemoQaAndAddBook() {
+    void loginDemoQa() {
         Response response = given(requestSpec)
-                .log().all()
                 .contentType(JSON)
                 .body("{\"password\": \"2Baikal123&\", \"userName\": \"2Baikal\"}")
 
@@ -31,7 +29,7 @@ public class TestBase {
                 .post("/Account/v1/login")
 
                 .then()
-                .statusCode(200)
+                .spec(BaseSpec.logAndStatusSpecs16(200))
                 .body("userId", notNullValue())
                 .extract()
                 .response();
@@ -40,29 +38,33 @@ public class TestBase {
         userId = response.path("userId");
 
         System.out.println("Успешный залогин и сохранили userId = " + token);
+    }
 
+    void takeIdBook() {
         isbn = given(requestSpec)
-                .log().all()
+
                 .when()
                 .get("/BookStore/v1/Books")
 
                 .then()
-                .statusCode(200)
+                .spec(BaseSpec.logAndStatusSpecs16(200))
                 .extract()
                 .path("books[0].isbn");
 
         System.out.println("Успешный вытащили айди книги isbn = " + isbn);
+    }
 
+    void addBookInAccount() {
         given(requestSpec)
-                .log().all()
                 .contentType(JSON)
                 .header("Authorization", "Bearer " + token)
                 .body("{\"userId\": \"" + userId + "\", \"collectionOfIsbns\": [{\"isbn\": \"" + isbn + "\"}]}")
 
                 .when()
                 .post("/BookStore/v1/Books")
+
                 .then()
-                .statusCode(201);
+                .spec(BaseSpec.logAndStatusSpecs16(201));
     }
 
 }

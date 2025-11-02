@@ -3,7 +3,7 @@ package guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models;
 import lombok.Data;
 
 @Data
-public class LombokIsbnUserId {
+public class IsbnUserId {
     private String isbn;
     private String userId;
 
