@@ -21,59 +21,12 @@ public class BaseSpecs {
             .log(LogDetail.ALL)
             .build();
 
-    public static ResponseSpecification createTestUser = new ResponseSpecBuilder()
-            .expectStatusCode(201)
+    public static ResponseSpecification logAndStatusSpecs(int expectStatusCode) {
+        return new ResponseSpecBuilder()
+            .expectStatusCode(expectStatusCode)
             .log(STATUS)
             .log(BODY)
             .build();
-
-    public static ResponseSpecification postCreateUser = new ResponseSpecBuilder()
-            .expectStatusCode(201)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification getCheckUser = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification putUser = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification putUser2 = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification patchUser = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification patchUser2 = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification deleteUser = new ResponseSpecBuilder()
-            .expectStatusCode(204)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-    public static ResponseSpecification deleteUser2 = new ResponseSpecBuilder()
-            .expectStatusCode(404)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
+    }
 }
 

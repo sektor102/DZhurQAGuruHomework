@@ -42,7 +42,7 @@ public class TestApiModuleJenkins {
                 .when()
                 .post()
                 .then()
-                .spec(BaseSpecs.createTestUser)
+                .spec(BaseSpecs.logAndStatusSpecs(201))
                 .extract().as(AddUserModel.class);
 
         response.setName(user.getName());
@@ -68,9 +68,7 @@ public class TestApiModuleJenkins {
                         .when()
                         .post()
                         .then()
-                        .log().status()
-                        .log().body()
-                        .spec(BaseSpecs.postCreateUser)
+                        .spec(BaseSpecs.logAndStatusSpecs(201))
                         .extract().as(AddUserModel.class)
         );
 
@@ -88,7 +86,7 @@ public class TestApiModuleJenkins {
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .spec(BaseSpecs.getCheckUser)
+                .spec(BaseSpecs.logAndStatusSpecs(200))
                 .body("id", equalTo(created.getId()))
                 .body("name", equalTo(created.getName()));
     }
@@ -110,7 +108,7 @@ public class TestApiModuleJenkins {
                 .then()
                 .log().status()
                 .log().body()
-                .spec(BaseSpecs.putUser)
+                .spec(BaseSpecs.logAndStatusSpecs(200))
                 .body("id", equalTo(created.getId()))
                 .body("message", equalTo("User fully updated"));
 
@@ -118,7 +116,7 @@ public class TestApiModuleJenkins {
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .spec(BaseSpecs.putUser2)
+                .spec(BaseSpecs.logAndStatusSpecs(200))
                 .body("name", equalTo(updatedUser.getName()))
                 .body("email", equalTo(updatedUser.getEmail()))
                 .body("gender", equalTo(updatedUser.getGender()));
@@ -138,7 +136,7 @@ public class TestApiModuleJenkins {
                 .then()
                 .log().status()
                 .log().body()
-                .spec(BaseSpecs.patchUser)
+                .spec(BaseSpecs.logAndStatusSpecs(200))
                 .body("id", equalTo(created.getId()))
                 .body("message", equalTo("User partially updated"));
 
@@ -146,7 +144,7 @@ public class TestApiModuleJenkins {
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .spec(BaseSpecs.patchUser2)
+                .spec(BaseSpecs.logAndStatusSpecs(200))
                 .body("name", equalTo(updatedUser.getName()));
     }
 
@@ -159,13 +157,13 @@ public class TestApiModuleJenkins {
                 .delete("/{id}", created.getId())
                 .then()
                 .log().status()
-                .spec(BaseSpecs.deleteUser);
+                .spec(BaseSpecs.logAndStatusSpecs(204));
 
         given(loginRequestSpec)
                 .when()
                 .get("/{id}", created.getId())
                 .then()
-                .spec(BaseSpecs.deleteUser2);
+                .spec(BaseSpecs.logAndStatusSpecs(404));
     }
 
 }
