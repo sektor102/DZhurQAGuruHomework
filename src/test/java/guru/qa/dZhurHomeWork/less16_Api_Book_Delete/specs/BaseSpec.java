@@ -7,13 +7,14 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static guru.qa.dZhurHomeWork.less16_Api_Book_Delete.helpers.Allure.withAllure;
+import static guru.qa.dZhurHomeWork.less14_Rest_Api_Spec.helper.CustomAllureListener.withAllure;
 import static io.restassured.filter.log.LogDetail.BODY;
 import static io.restassured.filter.log.LogDetail.STATUS;
 
 public class BaseSpec {
 
     public static RequestSpecification requestSpec = new RequestSpecBuilder()
+            .setBaseUri("https://demoqa.com")
             .setContentType(ContentType.JSON)
             .addFilter(withAllure())
             .log(LogDetail.ALL)
