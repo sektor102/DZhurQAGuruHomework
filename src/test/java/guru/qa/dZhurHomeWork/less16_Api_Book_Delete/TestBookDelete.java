@@ -6,26 +6,27 @@ import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.api.AddBookInAccountApi;
 import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.api.DeleteBookApi;
 import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.IsbnUserId;
 
+import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.LoginBodyRequest;
+import guru.qa.dZhurHomeWork.less16_Api_Book_Delete.models.LoginBodyResponse;
 import org.junit.jupiter.api.Test;
 
 public class TestBookDelete {
+    AccountLoginApi loginApi = new AccountLoginApi();
+    TakeBookIdApi bookApi = new TakeBookIdApi();
+    AddBookInAccountApi addApi = new AddBookInAccountApi();
+    DeleteBookApi deleteApi = new DeleteBookApi();
 
     @Test
     void deleteBookTest() {
-        AccountLoginApi loginApi = new AccountLoginApi();
-        IsbnUserId userData = new IsbnUserId();
-        userData.setUserName("2Baikal");
-        userData.setPassword("2Baikal123&");
 
-        userData = loginApi.loginDemoQa(userData);
+        LoginBodyRequest loginRequestBody = new LoginBodyRequest("2Baikal", "2Baikal123&");
 
-        TakeBookIdApi bookApi = new TakeBookIdApi();
-        userData = bookApi.takeBook(userData);
+        LoginBodyResponse loginBodyResponse = loginApi.loginDemoQa(loginRequestBody);
 
-        AddBookInAccountApi addApi = new AddBookInAccountApi();
+        IsbnUserId isbn = bookApi.takeBook();
+
         addApi.addBookInAccount(userData);
 
-        DeleteBookApi deleteApi = new DeleteBookApi();
         deleteApi.deleteBook(userData);
     }
 

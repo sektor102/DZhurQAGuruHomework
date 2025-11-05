@@ -5,10 +5,6 @@ import lombok.Data;
 @Data
 public class IsbnUserId {
     private String isbn;
-    private String userId;
-    private String token;
-    private String userName;
-    private String password;
 }
 
 
