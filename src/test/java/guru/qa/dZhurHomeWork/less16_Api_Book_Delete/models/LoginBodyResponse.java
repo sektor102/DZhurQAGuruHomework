@@ -8,14 +8,6 @@ import lombok.Data;
 public class LoginBodyResponse {
     String userId;
     String token;
+    String userName;
+    String expires;
 }
-
-
-/*
-
-{
-  "user_id": "sadaksdajks",
-  "token": "1oeqweoqwoeq"
-}
-
- */
