@@ -13,13 +13,11 @@ repositories {
     mavenCentral()
 }
 
-
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
 def allureVersion = '2.29.0'
 def aspectJVersion = '1.9.22'
-
 
 java {
     toolchain {
@@ -54,7 +52,6 @@ allure {
 }
 
 dependencies {
-
     agent "org.aspectj:aspectjweaver:$aspectJVersion"
 
     testImplementation(
@@ -67,38 +64,52 @@ dependencies {
             'org.apache.poi:poi-ooxml:5.4.1',
             'com.opencsv:opencsv:5.12.0',
             'com.fasterxml.jackson.core:jackson-databind:2.20.0',
-            platform("io.qameta.allure:allure-bom:$allureVersion"),
-            'io.qameta.allure:allure-junit5',
-            'io.qameta.allure:allure-selenide:2.29.1',
-            platform("org.junit:junit-bom:5.11.3"),
-            'org.junit.jupiter:junit-jupiter-api',
-            'io.rest-assured:rest-assured:5.5.6',
+            'io.rest-assured:rest-assured:5.5.0',
+            'io.rest-assured:json-schema-validator:5.5.0',
+            "io.qameta.allure:allure-junit5:$allureVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            'org.projectlombok:lombok:1.18.42'
     )
 
-    testRuntimeOnly (
-            "org.junit.jupiter:junit-jupiter-engine",
+    testRuntimeOnly(
+            'org.junit.jupiter:junit-jupiter-engine',
             'org.slf4j:slf4j-simple:2.0.17'
-
     )
 
-    implementation (
+    implementation(
             'net.datafaker:datafaker:2.4.4',
             'com.fasterxml.jackson.core:jackson-core:2.20.0',
-            'com.fasterxml.jackson.core:jackson-databind:2.20.0'
-
+            'com.fasterxml.jackson.core:jackson-databind:2.20.0',
+            'org.projectlombok:lombok:1.18.42'
     )
 
-    test {
-        ignoreFailures = true
-        useJUnitPlatform()
-        jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
-    }
-
-
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        def tags = System.getProperty("tags")
+        if (tags != null && !tags.isBlank()) {
+            includeTags(tags)
+        }
+
+        def testClass = System.getProperty("testClass")
+        if (testClass != null && !testClass.isBlank()) {
+            includePackagesOrClasses(testClass)
+        }
+    }
+
+    ignoreFailures = true
+    jvmArgs = ["-javaagent:${configurations.agent.singleFile}"]
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
 }
 
 def ts = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date())
@@ -113,43 +124,3 @@ tasks.register("allureReportTs") {
         println("Saved: ${layout.buildDirectory.get()}/reports/allure-report-${ts}")
     }
 }
-
-
-tasks.register('Baikal', Test) {
-    useJUnitPlatform {
-        includeTags("Baikal")
-    }
-}
-
-tasks.register('Baikal2', Test) {
-    useJUnitPlatform {
-        includeTags("Baikal2")
-    }
-    systemProperties(System.getProperties())
-}
-
-tasks.withType(Test).configureEach {
-    useJUnitPlatform {
-        def tags = System.getProperty("tags")
-        if (tags) {
-            includeTags tags.split(',')
-        }
-    }
-    systemProperties(System.getProperties())
-}
-
-tasks.withType(Test).configureEach {
-    useJUnitPlatform {
-        def tags = System.getProperty("tags")
-        if (tags) {
-            includeTags tags.split(',')
-        }
-    }
-    testLogging {
-        lifecycle {
-            events "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
-}
-
