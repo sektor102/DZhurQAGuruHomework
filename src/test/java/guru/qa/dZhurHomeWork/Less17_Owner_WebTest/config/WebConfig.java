@@ -5,8 +5,6 @@ import org.aeonbits.owner.Config;
 @Config.Sources("classpath:${env}.properties")
 public interface WebConfig extends Config {
 
-    // НИКАКИХ аннотаций @Key – Owner сам берёт имя метода как ключ
-
     String browser();
 
     String version();
